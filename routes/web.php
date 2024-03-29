@@ -7,5 +7,7 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-    return view('test');
+    $localName = 'Mohamed';
+    $dogs = ['do', 'fo', 'ho', 'po'];
+    return view('test', compact('localName', 'dogs'));
 });
