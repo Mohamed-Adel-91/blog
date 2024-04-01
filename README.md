@@ -64,4 +64,18 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
 # blog
+
+**  steps we need to do
+
+1. define a new route so we can access it with  the browser (GET request).
+2. create a controller that will handle this request and return data from our database.
+3. Create a view where we will display this data.
+4. Remove any static html data from the view.
+5. Make sure our application knows how to find the right view file for displaying our data.
+6. Define a model that represents our table in the database. This is called an Eloquent Model because it uses Active Record and Include some dummy data in our database.
+7. Use Eloquent ORM to retrieve data from your database instead of raw queries.
+8. Pass the retrieved data to the view using the view's "with" method.
+9. Display the passed data in the view.
+10. Customize the design of your page by modifying the CSS stylesheet included in the project. You can add classes to HTML elements.
