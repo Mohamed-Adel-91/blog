@@ -12,7 +12,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Blog App Post</a>
+            <a class="navbar-brand" href="#">Blog App Posts</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -21,7 +21,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">All Posts</a>
+                        <a class="nav-link active" aria-current="page" href="#">Get All Posts</a>
                     </li>
                 </ul>
                 <form class="d-flex" role="search">
@@ -42,7 +42,7 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Content</th>
+                    <th scope="col">Title</th>
                     <th scope="col">Author</th>
                     <th scope="col">Created At</th>
                     <th scope="col">Actions</th>
@@ -52,13 +52,13 @@
                 @foreach ($posts as $post)
                     <tr>
                         <th scope="row">{{ $post['id'] }}</th>
-                        <td>{{ $post['content'] }}</td>
+                        <td>{{ $post['title'] }}</td>
                         <td>{{ $post['author'] }}</td>
                         <td>{{ $post['created_at'] }}</td>
                         <td>
-                            <button type="button" class="btn btn-info">View</button>
-                            <button type="button" class="btn btn-primary">Edit</button>
-                            <button type="button" class="btn btn-danger">Delete</button>
+                            <a href="/posts/{{ $post['id'] }}" class="btn btn-info">View</a>
+                            <a href="#" class="btn btn-primary">Edit</a>
+                            <a href="#" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                 @endforeach
