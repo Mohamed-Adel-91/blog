@@ -32,4 +32,23 @@ class PostController extends Controller
     {
         return view('posts.create');
     }
+
+    public function store()
+    {
+        // 1. Validate the request...
+        $data = request()->validate([
+            'title' => 'required|min:3',
+            'description' => 'required',
+            'author' => 'required|min:3',
+            'email' => 'required|email',
+        ]);
+
+        // 2. Get the data from the request...
+        return $data;
+
+        // 3. Save the blog post in  the database...
+
+        // 4. Redirect to the home page with a success message...
+        // return redirect(route('posts.index'))->with('success', 'Your blog post has been saved!');
+    }
 }
