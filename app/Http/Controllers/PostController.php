@@ -51,4 +51,9 @@ class PostController extends Controller
         // 4. Redirect to the home page with a success message...
         // return redirect(route('posts.index'))->with('success', 'Your blog post has been saved!');
     }
+
+    public function edit($postId)
+    {
+        return view('posts.edit');
+    }
 }
