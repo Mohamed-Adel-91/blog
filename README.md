@@ -21,7 +21,7 @@ This is a simple blog posts web application built using the Laravel PHP framewor
 
 ## Installation
 
-1. Clone the repository: git clone <https://github.com/Mohamed-Adel-91/blog.git>
+1. Clone the repository: git clone <https://github.com/your_username/blog.git>
 
 2. Navigate to the project directory: cd blog
 
