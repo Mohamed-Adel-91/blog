@@ -6,7 +6,7 @@
     <!-- All Posts Page content -->
     <div class="container mt-1">
         <div class="text-center py-4">
-            <button type="button" class="btn btn-success">Create Post</button>
+            <a href="{{ route('posts.create') }}" class="btn btn-success">Create Post</a>
         </div>
         {{-- @dd($posts) --}}
         <table class="table mt-3">

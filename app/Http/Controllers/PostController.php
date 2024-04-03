@@ -18,8 +18,18 @@ class PostController extends Controller
     public function show($postId)
     {
         $singlePost = [
-            'id' => '1', 'title' => 'Title one', 'description' => 'This is the content of my first blog post!', 'author' => 'Mohamed Adel', 'email' => 'mohamed123@gmail.com', 'created_at' => '2024-04-01 11:19:08',
+            'id' => '1',
+            'title' => 'Title one',
+            'description' => 'This is the content of my first blog post!',
+            'author' => 'Mohamed Adel',
+            'email' => 'mohamed123@gmail.com',
+            'created_at' => '2024-04-01 11:19:08',
         ];
         return view('posts.show', ['post' => $singlePost]);
+    }
+
+    public function create()
+    {
+        return view('posts.create');
     }
 }
