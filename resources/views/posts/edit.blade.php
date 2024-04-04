@@ -5,8 +5,9 @@
 @section('content')
     <div class="container">
         <h1>Update post no. </h1>
-        <form method="PUT" action="{{ route('posts.store') }}">
+        <form method="POST" action="{{ route('posts.update', 1) }}">
             @csrf
+            @method('PUT')
             <div class="form-floating mb-3">
                 <input name="title" class="form-control" placeholder="Leave a comment here" id="floatingTextarea1"></input>
                 <label for="floatingTextarea1">Title</label>

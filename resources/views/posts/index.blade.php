@@ -29,9 +29,25 @@
                         <td>
                             <a href="{{ route('posts.show', $post['id']) }}" class="btn btn-info">View</a>
                             <a href="{{ route('posts.edit', $post['id']) }}" class="btn btn-primary">Edit</a>
-                            <a href="#" class="btn btn-danger">Delete</a>
+                            <form action="{{ route('posts.destroy', $post['id']) }}" method="POST"
+                                class="d-inlin delete_form" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button onclick="checker()" type="submit"
+                                    class="btn btn-danger confirm_delete">Delete</button>
+                            </form>
                         </td>
                     </tr>
+                    <script>
+                        function checker() {
+                            var result = confirm("Are you sure to delete this post?");
+                            if (result == false) {
+                                event.preventDefault();
+                            } else {
+                                $('.delete_form').submit();
+                            }
+                        }
+                    </script>
                 @endforeach
             </tbody>
         </table>

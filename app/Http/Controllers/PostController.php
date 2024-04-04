@@ -44,16 +44,41 @@ class PostController extends Controller
         ]);
 
         // 2. Get the data from the request...
-        return $data;
+        // return $data;
 
         // 3. Save the blog post in  the database...
 
         // 4. Redirect to the home page with a success message...
-        // return redirect(route('posts.index'))->with('success', 'Your blog post has been saved!');
+        return redirect(route('posts.index'))->with('success', 'Your blog post has been saved!');
     }
 
-    public function edit($postId)
+    public function edit()
     {
         return view('posts.edit');
+    }
+    public function update($postId)
+    {
+        // 1. Validate the request...
+        $data = request()->validate([
+            'title' => 'required|min:3',
+            'description' => 'required',
+            'author' => 'required|min:3',
+            'email' => 'required|email',
+        ]);
+        // 2. Get the data from the request...
+        // return $data;
+
+        // 3. update the blog post in the database...
+
+        // 4. Redirect to the home page with a success message...
+        return redirect(route('posts.show', 1))->with('success', 'Your blog post has been updated!');
+    }
+
+    public function destroy($postId)
+    {
+        //1. Delete the blog post from the database...
+
+        //2. Redirect to the home page with a success message...
+        return redirect(route('posts.index'))->with('success', 'Your blog post has been Deleted!');
     }
 }
