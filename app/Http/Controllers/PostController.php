@@ -2,30 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+use Illuminate\Http\Request;
+
 class PostController extends Controller
 {
     public function index()
     {
-        $allPosts = [
-            ['id' => '1', 'title' => 'This is the content of my first blog post!', 'author' => 'Mohamed Adel', 'created_at' => '2024-04-01 11:19:08'],
-            ['id' => '2', 'title' => 'This is the content of my second blog post!', 'author' => 'Ali Nor', 'created_at' => '2024-02-21 06:30:07'],
-            ['id' => '3', 'title' => 'This is the content of my third blog post!', 'author' => 'Gamal sayed', 'created_at' => '2023-12-01 12:05:06'],
-            ['id' => '4', 'title' => 'This is the content of my forth blog post!', 'author' => 'Shady Joe', 'created_at' => '2021-09-11 09:23:40'],
-        ];
-        return view('posts.index', ['posts' => $allPosts]);
+        // SELECT * FROM posts;
+        $postsFromDB = Post::all(); // Get all posts from the database.
+        return view('posts.index', ['posts' => $postsFromDB]);
     }
 
-    public function show($postId)
+    public function show(Post $post)
+    //This is called Route Model Binding, Laravel will automatically look for a post with an id that matches what
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     {
-        $singlePost = [
-            'id' => '1',
-            'title' => 'Title one',
-            'description' => 'This is the content of my first blog post!',
-            'author' => 'Mohamed Adel',
-            'email' => 'mohamed123@gmail.com',
-            'created_at' => '2024-04-01 11:19:08',
-        ];
-        return view('posts.show', ['post' => $singlePost]);
+        // SELECT * FROM posts WHERE id=? LIMIT 1;
+        // $singlePostFromDB = Post::findOrFail($postId); // Find a single post by its ID, if it doesn't exist then throw a NotFoundException.
+        //$singlePostFromDB = Post::where('id', $postId)->firstOrFail(); // Retrieve a single post by its ID, if it doesn't exist then
+        //$singlePostFromDB = Post::where('title', 'PHP')->get(); // Find all posts with this title and get it.
+        return view('posts.show', ['post' => $post]);
     }
 
     public function create()
