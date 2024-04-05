@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+// use Illuminate\Foundation\Auth\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -31,7 +33,8 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('posts.create');
+        $users = User::all();
+        return view('posts.create', ['users' => $users]);
     }
 
     public function store()
@@ -40,10 +43,10 @@ class PostController extends Controller
         $data = request()->validate([
             'title' => 'required|min:3',
             'description' => 'required',
-            'author' => 'required|min:3',
+            'postCreator' => 'required|min:3',
             'email' => 'required|email',
         ]);
-
+        dd($data);
         // 2. Get the data from the request...
         // return $data;
 
