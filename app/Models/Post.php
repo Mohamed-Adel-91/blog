@@ -19,4 +19,9 @@ class Post extends Model
     {
         return $this->belongsTo(User::class); //Relationship between Post and User model. One to Many relationship
     }
+
+    public function postEmail()
+    {
+        return $this->belongsTo(User::class, 'email');
+    }
 }

@@ -27,7 +27,8 @@
                             aria-label="Floating label select example">
                             <option selected>Open to select Username</option>
                             @foreach ($users as $user)
-                                <option value="{{ $user->id }}" data-email="{{ $user->email }}">
+                                <option @if ($user->id == $post->user_id) selected @endif value="{{ $user->id }}"
+                                    data-email="{{ $user->email }}">
                                     {{ $user->name }}
                                 </option>
                             @endforeach
@@ -35,8 +36,9 @@
                         <label for="floatingSelect">Username</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input name="email" type="email" class="form-control" id="floatingInputDisabled"
-                            placeholder="name@example.com" disabled>
+                        <input @if ($user->id == $post->user_id) value="{{ $user->email }}" @endif name="email"
+                            type="email" class="form-control" id="floatingInputDisabled" placeholder="name@example.com"
+                            disabled>
                         <label for="floatingInputDisabled">Email address</label>
                     </div>
                     <div class="form-floating mb-3">

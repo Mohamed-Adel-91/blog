@@ -44,9 +44,10 @@
                         </select>
                         <label for="floatingSelect">Username</label>
                     </div>
+
                     <div class="form-floating mb-3">
-                        <input name="email" type="email" class="form-control" id="floatingInputDisabled"
-                            placeholder="name@example.com" disabled>
+                        <input value="{{ $post->postEmail }}" name="email" type="email" class="form-control"
+                            id="floatingInputDisabled" placeholder="name@example.com" disabled>
                         <label for="floatingInputDisabled">Email address</label>
                     </div>
                     <div class="form-floating mb-3">
