@@ -40,18 +40,31 @@ class PostController extends Controller
     public function store()
     {
         // 1. Validate the request...
-        $data = request()->validate([
-            'title' => 'required|min:3',
-            'description' => 'required',
-            'postCreator' => 'required|min:3',
-            'email' => 'required|email',
-        ]);
-        dd($data);
+        // $data = request()->validate([
+        //     'title' => 'required|min:3',
+        //     'description' => 'required',
+        //     'postCreator' => 'required|min:3',
+        //     'email' => 'required|email',
+        // ]);
         // 2. Get the data from the request...
-        // return $data;
+        $data = request()->all();
+        $title = request()->title;
+        $description = request()->description;
+        $postCreator = request()->post_creator;
+        $email = request()->email;
 
         // 3. Save the blog post in  the database...
+        // $post = new Post;
+        // $post->title = $title;
+        // $post->description = $description;
+        // $post->email = $email;
+        // $post->save();
 
+        Post::create([
+            'title' => $title,
+            'description' => $description,
+            'email' => $email,
+        ]);
         // 4. Redirect to the home page with a success message...
         return redirect(route('posts.index'))->with('success', 'Your blog post has been saved!');
     }

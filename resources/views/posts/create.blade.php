@@ -6,21 +6,18 @@
     <div class="container">
         <div class="container mb-3 d-inline-flex justify-content-between col">
             <h1>Create a new post</h1>
-            <button type="submit" class="btn btn-success">Submit</button>
         </div>
         <form method="POST" action="{{ route('posts.store') }}">
             @csrf
             <div class="form-floating mb-3">
                 <input name="title" class="form-control" placeholder="Leave a comment here" id="floatingTextarea1"></input>
                 <label for="floatingTextarea1">Title</label>
-                {{-- <div id="titleHelp" class="form-text">Enter at least 5 characters.</div> --}}
             </div>
 
             <div class="form-floating mb-3">
                 <textarea name="description" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
                     style="height: 200px"></textarea>
                 <label for="floatingTextarea2">Description</label>
-                {{-- <div id="descHelp" class="form-text">Enter at least 50 characters.</div> --}}
             </div>
 
             <p class="d-inline-flex gap-1 mb-3">
@@ -39,15 +36,16 @@
                         <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
                             <option selected>Open to select Username</option>
                             @foreach ($users as $user)
-                                <option value="{{ $user->id }}" data-email="{{ $user->email }}">{{ $user->name }}
+                                <option name="post_creator" value="{{ $user->id }}" data-email="{{ $user->email }}">
+                                    {{ $user->name }}
                                 </option>
                             @endforeach
                         </select>
                         <label for="floatingSelect">Username</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInputDisabled" placeholder="name@example.com"
-                            disabled>
+                        <input name="email" type="email" class="form-control" id="floatingInputDisabled"
+                            placeholder="name@example.com" disabled>
                         <label for="floatingInputDisabled">Email address</label>
                     </div>
                     <div class="form-floating mb-3">
@@ -63,17 +61,15 @@
                     <section class="mb-3" id="createUserForm">
                         <div class="input-group mb-3">
                             <div class="form-floating">
-                                <input name="author" type="text" class="form-control" id="floatingInputGroup1"
+                                <input name="post_creator" type="text" class="form-control" id="floatingInputGroup1"
                                     placeholder="Username">
                                 <label for="floatingInputGroup1">Username</label>
-                                {{-- <div id="descHelp" class="form-text">Enter at least 3 characters.</div> --}}
                             </div>
                         </div>
                         <div class="form-floating mb-3">
                             <input name="email" type="email" class="form-control" id="floatingInput"
                                 placeholder="name@example.com">
                             <label for="floatingInput">Email address</label>
-                            {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> --}}
                         </div>
                         <div class="form-floating mb-3">
                             <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
@@ -82,19 +78,22 @@
                     </section>
                 </div>
             </div>
+            <button type="submit" class="btn btn-success">Submit</button>
         </form>
     </div>
     <script>
+        // script for get email from  user list and put it to create user form
         document.getElementById('floatingSelect').addEventListener('change', function() {
-            var selectedOption = this.options[this.selectedIndex];
-            var emailInput = document.getElementById('floatingInputDisabled');
+            let selectedOption = this.options[this.selectedIndex];
+            let emailInput = document.getElementById('floatingInputDisabled');
             emailInput.value = selectedOption.getAttribute('data-email');
         });
     </script>
     <script>
+        // script to handle login or create new account button action
         function toggleCollapse(id) {
-            var collapseElement = document.getElementById(id);
-            var otherCollapseElement = id === 'collapseExample1' ? document.getElementById('collapseExample2') : document
+            let collapseElement = document.getElementById(id);
+            let otherCollapseElement = id === 'collapseExample1' ? document.getElementById('collapseExample2') : document
                 .getElementById('collapseExample1');
             if (collapseElement.classList.contains('show')) {
                 return;
