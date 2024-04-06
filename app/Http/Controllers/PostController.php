@@ -47,14 +47,13 @@ class PostController extends Controller
     public function store()
     {
         /**
-         * 1. Validate the request...
-        $data = request()->validate([
-        'title' => 'required|min:3',
-        'description' => 'required',
-        'postCreator' => 'required|min:3',
-        'email' => 'required|email',
+         * 1. Validate the request... */
+        request()->validate([
+            'title' => 'required|min:3',
+            'description' => 'required|min:3',
+            'postCreator' => 'required|exists:Users,id', // Checks if user_id exists in users table column id.
+            'email' => 'email',
         ]);
-         */
 
         // 2. Get the data from the request...
         $data = request()->all();
@@ -94,14 +93,13 @@ class PostController extends Controller
     public function update($postId)
     {
         /**
-         * 1. Validate the request...
-        $data = request()->validate([
-        'title' => 'required|min:3',
-        'description' => 'required',
-        'postCreator' => 'required|min:3',
-        'email' => 'required|email',
+         * 1. Validate the request... */
+        request()->validate([
+            'title' => 'required|min:3',
+            'description' => 'required|min:3',
+            'postCreator' => 'required|exists:App\Models\User,id',
+            'email' => 'email',
         ]);
-         */
 
         // 2. Get the data from the request...
         $data = request()->all();

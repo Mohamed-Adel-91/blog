@@ -3,20 +3,31 @@
     Create Post
 @endsection
 @section('content')
+
     <div class="container">
         <div class="container mb-3 d-inline-flex justify-content-between col">
             <h1>Create a new post</h1>
         </div>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <form id="postForm" method="POST" action="{{ route('posts.store') }}">
             @csrf
             <div class="form-floating mb-3">
-                <input name="title" class="form-control" placeholder="Leave a comment here" id="floatingTextarea1"></input>
+                <input name="title" class="form-control" placeholder="Leave a comment here" id="floatingTextarea1"
+                    value="{{ old('title') }}"></input>
                 <label for="floatingTextarea1">Title</label>
             </div>
 
             <div class="form-floating mb-3">
                 <textarea name="description" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-                    style="height: 200px"></textarea>
+                    style="height: 200px">{{ old('description') }}</textarea>
                 <label for="floatingTextarea2">Description</label>
             </div>
 
@@ -46,8 +57,8 @@
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input value="{{ $post->postEmail }}" name="email" type="email" class="form-control"
-                            id="floatingInputDisabled" placeholder="name@example.com" disabled>
+                        <input name="email" type="email" class="form-control" id="floatingInputDisabled"
+                            placeholder="name@example.com" disabled>
                         <label for="floatingInputDisabled">Email address</label>
                     </div>
                     <div class="form-floating mb-3">
