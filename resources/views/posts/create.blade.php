@@ -36,7 +36,7 @@
                         <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
                             <option selected>Open to select Username</option>
                             @foreach ($users as $user)
-                                <option name="post_creator" value="{{ $user->id }}" data-email="{{ $user->email }}">
+                                <option name="postCreator" value="{{ $user->id }}" data-email="{{ $user->email }}">
                                     {{ $user->name }}
                                 </option>
                             @endforeach
@@ -61,7 +61,7 @@
                     <section class="mb-3" id="createUserForm">
                         <div class="input-group mb-3">
                             <div class="form-floating">
-                                <input name="post_creator" type="text" class="form-control" id="floatingInputGroup1"
+                                <input name="postCreator" type="text" class="form-control" id="floatingInputGroup1"
                                     placeholder="Username">
                                 <label for="floatingInputGroup1">Username</label>
                             </div>

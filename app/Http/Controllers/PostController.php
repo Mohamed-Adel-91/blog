@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    //------------------------------------- Index ---------------------------------------------
     public function index()
     {
         // Get all posts from the database.
@@ -16,6 +17,7 @@ class PostController extends Controller
         return view('posts.index', ['posts' => $postsFromDB]);
     }
 
+    //-------------------------------------- Show -----------------------------------------------
     public function show(Post $post)
     /**
     This is called Route Model Binding,
@@ -34,12 +36,14 @@ class PostController extends Controller
         return view('posts.show', ['post' => $post]);
     }
 
+    //-------------------------------------- Create -----------------------------------------------
     public function create()
     {
         $users = User::all();
         return view('posts.create', ['users' => $users]);
     }
 
+    //-------------------------------------- Store -----------------------------------------------
     public function store()
     {
         /**
@@ -56,7 +60,7 @@ class PostController extends Controller
         $data = request()->all();
         $title = request()->title;
         $description = request()->description;
-        $postCreator = request()->post_creator;
+        $postCreator = request()->postCreator;
         $email = request()->email;
 
         /**
@@ -71,6 +75,7 @@ class PostController extends Controller
         Post::create([
             'title' => $title,
             'description' => $description,
+            'user_id' => $postCreator,
             'email' => $email,
         ]);
 
@@ -78,11 +83,14 @@ class PostController extends Controller
         return redirect(route('posts.index'))->with('success', 'Your blog post has been saved!');
     }
 
+    //-------------------------------------- Edit -----------------------------------------------
     public function edit(Post $post)
     {
         $users = User::all();
         return view('posts.edit', ['users' => $users, 'post' => $post]);
     }
+
+    //-------------------------------------- Update -----------------------------------------------
     public function update($postId)
     {
         /**
@@ -99,7 +107,7 @@ class PostController extends Controller
         $data = request()->all();
         $title = request()->title;
         $description = request()->description;
-        $postCreator = request()->post_creator;
+        $postCreator = request()->postCreator;
         $email = request()->email;
 
         // 3. update the blog post in the database...
@@ -107,6 +115,7 @@ class PostController extends Controller
         $singlePostFromDB->update([
             'title' => $title,
             'description' => $description,
+            'user_id' => $postCreator,
             'email' => $email,
         ]);
 
@@ -114,9 +123,12 @@ class PostController extends Controller
         return redirect(route('posts.show', $postId))->with('success', 'Your blog post has been updated!');
     }
 
+    //-------------------------------------- Destroy -----------------------------------------------
     public function destroy($postId)
     {
         //1. Delete the blog post from the database...
+        $singlePostFromDB = Post::findOrFail($postId);
+        $singlePostFromDB->delete();
 
         //2. Redirect to the home page with a success message...
         return redirect(route('posts.index'))->with('success', 'Your blog post has been Deleted!');
