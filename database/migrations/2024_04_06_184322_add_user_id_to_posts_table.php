@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        //  Create table to create user_id column by Foreign Key Constraints
         Schema::table('posts', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id')->nullable();
 

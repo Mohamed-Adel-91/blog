@@ -25,7 +25,7 @@
                     <tr>
                         <th scope="row">{{ $post->id }}</th>
                         <td>{{ $post->title }}</td>
-                        <td>{{ $post->user }}</td>
+                        <td>{{ $post->user ? $post->user->name : 'not found' }}</td>
                         <td>{{ $post->created_at }}</td>
                         <td>{{ $post->updated_at }}</td>
                         <td>

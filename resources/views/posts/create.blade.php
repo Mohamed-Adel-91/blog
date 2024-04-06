@@ -7,7 +7,7 @@
         <div class="container mb-3 d-inline-flex justify-content-between col">
             <h1>Create a new post</h1>
         </div>
-        <form method="POST" action="{{ route('posts.store') }}">
+        <form id="postForm" method="POST" action="{{ route('posts.store') }}">
             @csrf
             <div class="form-floating mb-3">
                 <input name="title" class="form-control" placeholder="Leave a comment here" id="floatingTextarea1"></input>
@@ -21,22 +21,23 @@
             </div>
 
             <p class="d-inline-flex gap-1 mb-3">
-                <button class="btn btn-primary" type="button" onclick="toggleCollapse('collapseExample1')">Select
-                    Username</button>
+                <button class="btn btn-primary" type="button" onclick="toggleCollapse('collapseExample1')">
+                    Select Username</button>
             </p>
             <p class="d-inline-flex gap-1 mb-3">
-                <button class="btn btn-primary" type="button" onclick="toggleCollapse('collapseExample2')">Create New
-                    Username</button>
+                <button class="btn btn-primary" type="button" onclick="toggleCollapse('collapseExample2')">
+                    Create New Username</button>
             </p>
 
             <!-- Collapsible wrapper -->
             <div class="collapse mb-3" id="collapseExample1">
                 <div class="card card-body">
                     <div class="form-floating mb-3" id="selectUserFromDB">
-                        <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                        <select name="postCreator" class="form-select" id="floatingSelect"
+                            aria-label="Floating label select example">
                             <option selected>Open to select Username</option>
                             @foreach ($users as $user)
-                                <option name="postCreator" value="{{ $user->id }}" data-email="{{ $user->email }}">
+                                <option value="{{ $user->id }}" data-email="{{ $user->email }}">
                                     {{ $user->name }}
                                 </option>
                             @endforeach
@@ -49,7 +50,8 @@
                         <label for="floatingInputDisabled">Email address</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                        <input name="password" type="password" class="form-control" id="floatingPassword"
+                            placeholder="Password">
                         <label for="floatingPassword">Password</label>
                     </div>
                 </div>
@@ -61,24 +63,25 @@
                     <section class="mb-3" id="createUserForm">
                         <div class="input-group mb-3">
                             <div class="form-floating">
-                                <input name="postCreator" type="text" class="form-control" id="floatingInputGroup1"
+                                <input name="newUsername" type="text" class="form-control" id="floatingInputGroup1"
                                     placeholder="Username">
                                 <label for="floatingInputGroup1">Username</label>
                             </div>
                         </div>
                         <div class="form-floating mb-3">
-                            <input name="email" type="email" class="form-control" id="floatingInput"
+                            <input name="newEmail" type="email" class="form-control" id="floatingInput"
                                 placeholder="name@example.com">
                             <label for="floatingInput">Email address</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                            <input type="newPassword" class="form-control" id="floatingPassword" placeholder="Password">
                             <label for="floatingPassword">Password</label>
                         </div>
                     </section>
                 </div>
             </div>
-            <button type="submit" class="btn btn-success">Submit</button>
+            <button type="submit" id="submitButton" class="btn btn-success">Submit</button>
+            <button type="button" id="signupAndPostButton" class="btn btn-success d-none">Signup and Post</button>
         </form>
     </div>
     <script>
@@ -88,8 +91,7 @@
             let emailInput = document.getElementById('floatingInputDisabled');
             emailInput.value = selectedOption.getAttribute('data-email');
         });
-    </script>
-    <script>
+
         // script to handle login or create new account button action
         function toggleCollapse(id) {
             let collapseElement = document.getElementById(id);
@@ -100,6 +102,15 @@
             }
             collapseElement.classList.toggle('show');
             otherCollapseElement.classList.remove('show');
+
+            // Show or hide buttons based on collapse state
+            if (id === 'collapseExample2') {
+                document.getElementById('submitButton').classList.add('d-none');
+                document.getElementById('signupAndPostButton').classList.remove('d-none');
+            } else {
+                document.getElementById('submitButton').classList.remove('d-none');
+                document.getElementById('signupAndPostButton').classList.add('d-none');
+            }
         }
     </script>
 @endsection

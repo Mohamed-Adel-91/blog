@@ -23,10 +23,11 @@
             <div class="mb-3" id="collapseExample1">
                 <div class="card card-body">
                     <div class="form-floating mb-3" id="selectUserFromDB">
-                        <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                        <select name="postCreator" class="form-select" id="floatingSelect"
+                            aria-label="Floating label select example">
                             <option selected>Open to select Username</option>
                             @foreach ($users as $user)
-                                <option name="post_creator" value="{{ $user->id }}" data-email="{{ $user->email }}">
+                                <option value="{{ $user->id }}" data-email="{{ $user->email }}">
                                     {{ $user->name }}
                                 </option>
                             @endforeach
@@ -39,7 +40,8 @@
                         <label for="floatingInputDisabled">Email address</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                        <input name="password" type="password" class="form-control" id="floatingPassword"
+                            placeholder="Password">
                         <label for="floatingPassword">Password</label>
                     </div>
                 </div>
