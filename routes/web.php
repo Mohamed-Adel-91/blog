@@ -34,4 +34,4 @@ Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.
 
 // Home routes
 
-Route::get('/admin/dashboard', [HomeController::class, 'index'])->middleware(['auth', 'admin']);
+Route::get('/admin/dashboard', [HomeController::class, 'index'])->middleware(['auth', 'admin', 'client']);
