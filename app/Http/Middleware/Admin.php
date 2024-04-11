@@ -16,9 +16,12 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->user_type != 'admin') {
-            return redirect(route('dashboard'))->with('error', "You don't have admin access.");
+        if (Auth::user()->user_type == 'admin') {
+            return $next($request);
+        } elseif (Auth::user()->user_type == 'client') {
+            return redirect(route('dashboard'))->withErrors(['You do not have admin access']);
+        } else {
+            abort(401); // Not authorized
         }
-        return $next($request);
     }
 }
