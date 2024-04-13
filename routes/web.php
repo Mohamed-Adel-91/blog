@@ -39,5 +39,6 @@ Route::delete('/posts/{post}', [PostController::class, 'destroy'])->middleware([
 
 // New Version Posts routes
 
-Route::get('/post_page', [AdminController::class, 'post_page']);
-Route::post('/add_post', [AdminController::class, 'add_post']);
+Route::get('/post_page', [AdminController::class, 'post_page'])->name('admin.post_page');
+Route::post('/add_post', [AdminController::class, 'add_post'])->name('admin.post_page');
+Route::get('/show_post', [AdminController::class, 'show_post'])->name('admin.show_post');

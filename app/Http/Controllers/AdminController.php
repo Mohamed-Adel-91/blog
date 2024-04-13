@@ -36,11 +36,17 @@ class AdminController extends Controller
             $file->move('uploads/images', $filename);
             $post->image = $filename;
         } else {
-            $post->image = null;
+            $post->image = 'null.png';
         }
 
         $post->save();
         return redirect()->back()->with('message', 'Post Added Successfully!');
+    }
+
+    public function show_post()
+    {
+        $posts = Post::all();
+        return view('admin.show_post', compact('posts'))->with('posts', Post::orderBy('created_at', 'desc')->paginate(10));
     }
 
 }

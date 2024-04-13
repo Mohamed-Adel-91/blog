@@ -31,17 +31,17 @@
                 <label for="floatingTextarea2">Description</label>
             </div>
 
-            <p class="d-inline-flex gap-1 mb-3">
+            {{-- <p class="d-inline-flex gap-1 mb-3">
                 <button class="btn btn-primary" type="button" onclick="toggleCollapse('collapseExample1')">
                     Select Username</button>
-            </p>
-            <p class="d-inline-flex gap-1 mb-3">
+            </p> --}}
+            {{-- <p class="d-inline-flex gap-1 mb-3">
                 <button class="btn btn-primary" type="button" onclick="toggleCollapse('collapseExample2')">
                     Create New Username</button>
-            </p>
+            </p> --}}
 
             <!-- Collapsible wrapper -->
-            <div class="collapse mb-3" id="collapseExample1">
+            <div class=" mb-3" id="collapseExample1">
                 <div class="card card-body">
                     <div class="form-floating mb-3" id="selectUserFromDB">
                         <select name="postCreator" class="form-select" id="floatingSelect"
@@ -61,17 +61,16 @@
                             placeholder="name@example.com" disabled>
                         <label for="floatingInputDisabled">Email address</label>
                     </div>
-                    <div class="form-floating mb-3">
+                    {{-- <div class="form-floating mb-3">
                         <input name="password" type="password" class="form-control" id="floatingPassword"
                             placeholder="Password">
                         <label for="floatingPassword">Password</label>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
-
-            <div class="collapse mb-3" id="collapseExample2">
+            {{-- Create New User --}}
+            {{-- <div class="collapse mb-3" id="collapseExample2">
                 <div class="card card-body">
-                    {{-- Create New User --}}
                     <section class="mb-3" id="createUserForm">
                         <div class="input-group mb-3">
                             <div class="form-floating">
@@ -91,9 +90,9 @@
                         </div>
                     </section>
                 </div>
-            </div>
+            </div> --}}
             <button type="submit" id="submitButton" class="btn btn-success">Submit</button>
-            <button type="button" id="signupAndPostButton" class="btn btn-success d-none">Signup and Post</button>
+            {{-- <button type="button" id="signupAndPostButton" class="btn btn-success d-none">Signup and Post</button> --}}
         </form>
     </div>
     <script>

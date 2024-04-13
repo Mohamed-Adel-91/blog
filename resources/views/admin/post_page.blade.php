@@ -18,6 +18,7 @@
             align-items: center;
             text-align: center;
             padding: 25px;
+
         }
 
         label {
@@ -33,7 +34,7 @@
         <!-- Sidebar Navigation-->
         @include('admin.sidebar')
         <!-- Sidebar Navigation end-->
-        <div class="page-content">
+        <div class="page-content ">
             @if (session()->has('message'))
                 <div class="alert alert-success" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>

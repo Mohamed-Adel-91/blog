@@ -50,11 +50,11 @@
                             disabled>
                         <label for="floatingInputDisabled">Email address</label>
                     </div>
-                    <div class="form-floating mb-3">
+                    {{-- <div class="form-floating mb-3">
                         <input name="password" type="password" class="form-control" id="floatingPassword"
                             placeholder="Password">
                         <label for="floatingPassword">Password</label>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Update</button>

@@ -14,7 +14,7 @@ class PostController extends Controller
         // Get all posts from the database.
         // SELECT * FROM posts;
         $postsFromDB = Post::all();
-        return view('posts.index', ['posts' => $postsFromDB]);
+        return view('admin.show_post', ['posts' => $postsFromDB]);
     }
 
     //-------------------------------------- Show -----------------------------------------------
@@ -79,7 +79,7 @@ class PostController extends Controller
         ]);
 
         // 4. Redirect to the home page with a success message...
-        return redirect(route('posts.index'))->with('success', 'Your blog post has been saved!');
+        return redirect(route('admin.show_post'))->with('success', 'Your blog post has been saved!');
     }
 
     //-------------------------------------- Edit -----------------------------------------------
@@ -129,6 +129,6 @@ class PostController extends Controller
         $singlePostFromDB->delete();
 
         //2. Redirect to the home page with a success message...
-        return redirect(route('posts.index'))->with('success', 'Your blog post has been Deleted!');
+        return redirect(route('admin.show_post'))->with('success', 'Your blog post has been Deleted!');
     }
 }
