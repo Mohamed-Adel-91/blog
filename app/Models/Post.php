@@ -13,6 +13,10 @@ class Post extends Model
         'description',
         'user_id',
         'email',
+        'image',
+        'name',
+        'post_status',
+        'user_type',
     ];
 
     public function user()
