@@ -12,12 +12,9 @@ use Illuminate\Support\Facades\Route;
 
 // Home routes
 
-Route::get('/', [HomeController::class, 'homepage'])->name('homePage');
-
-Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'admin'])->name('home');
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [HomeController::class, 'homepage'])->name('home');
+Route::get('/dashboardAdmin', [HomeController::class, 'index'])->middleware(['auth', 'verified', 'admin'])->name('dashboardAdmin');
+Route::get('/dashboard', function () {return view('dashboard');})->middleware(['auth', 'verified', 'client'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -27,7 +24,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-// Posts routes
+// Posts routes old version
 
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
@@ -39,6 +36,8 @@ Route::delete('/posts/{post}', [PostController::class, 'destroy'])->middleware([
 
 // New Version Posts routes
 
+Route::get('/dashboardAdmin', [AdminController::class, 'homeAdmin'])->middleware(['auth', 'verified', 'admin'])->name('admin.homeAdmin');
 Route::get('/post_page', [AdminController::class, 'post_page'])->name('admin.post_page');
-Route::post('/add_post', [AdminController::class, 'add_post'])->name('admin.post_page');
+Route::post('/add_post', [AdminController::class, 'add_post'])->name('admin.add_post');
 Route::get('/show_post', [AdminController::class, 'show_post'])->name('admin.show_post');
+Route::get('/Delete_post/{id}', [AdminController::class, 'Delete_post'])->name('admin.Delete_post');

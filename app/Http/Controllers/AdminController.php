@@ -3,15 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
-// use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+    public function homeAdmin()
+    {
+        $user = Auth::user();
+        $username = $user->name;
+        $userType = $user->user_type;
+
+        return view('admin.homeAdmin', compact('username', 'userType'));
+    }
     public function post_page()
     {
-        return view('admin.post_page');
+        $user = Auth::user();
+        $username = $user->name;
+        $userType = $user->user_type;
+        return view('admin.post_page', compact(['username', 'userType']));
     }
     public function add_post(Request $request)
     {
@@ -46,7 +57,10 @@ class AdminController extends Controller
     public function show_post()
     {
         $posts = Post::all();
-        return view('admin.show_post', compact('posts'))->with('posts', Post::orderBy('created_at', 'desc')->paginate(10));
+        $user = Auth::user();
+        $username = $user->name;
+        $userType = $user->user_type;
+        return view('admin.show_post', compact(['posts', 'username', 'userType']))->with('posts', Post::orderBy('created_at', 'desc')->paginate(10));
     }
 
 }

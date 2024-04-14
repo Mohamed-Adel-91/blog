@@ -25,12 +25,19 @@
                         <li class="nav-item">
                             <a class="nav-link " href="contact.html">Contact</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="{{ route('login') }}">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="{{ route('register') }}">Register</a>
-                        </li>
+                        @if (Route::has('login'))
+                            @auth
+                                @if (Auth::user()->user_type == 'admin')
+                                    <li><a href="{{ url('/dashboardAdmin') }}">Dashboard</a></li>
+                                @elseif (Auth::user()->user_type == 'client')
+                                    <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
+                                @endif
+                            @else
+                                <li><a href="{{ route('login') }}">Login</a></li>
+                                <li><a href="{{ route('register') }}">Register</a></li>
+                            @endauth
+                        @endif
+                    </ul>
                     </ul>
                 </div>
             </nav>
@@ -46,7 +53,11 @@
                     <li><a href="contact.html">Contact us</a></li>
                     @if (Route::has('login'))
                         @auth
-                            <li><a href="{{ route('home') }}">Dashboard</a></li>
+                            @if (Auth::user()->user_type == 'admin')
+                                <li><a href="{{ url('/dashboardAdmin') }}">Dashboard</a></li>
+                            @elseif (Auth::user()->user_type == 'client')
+                                <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
+                            @endif
                         @else
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>

@@ -11,18 +11,15 @@ class HomeController extends Controller
     {
         if (Auth::id()) {
             $user_type = Auth()->user()->user_type;
-            if ($user_type == 'client') {
+            if ($user_type != 'admin') {
                 return view('dashboard');
-            } elseif ($user_type == 'admin') {
-                return view('admin.homeAdmin');
-            } else {
-                return redirect()->back();
             }
+            return redirect()->back();
         }
     }
 
     public function homepage()
     {
-        return view('home.homepage');
+        return view('home.homePage');
     }
 }
