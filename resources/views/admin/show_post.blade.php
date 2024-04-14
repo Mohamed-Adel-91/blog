@@ -3,6 +3,9 @@
 
 <head>
     @include('admin.adminCss')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+        integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
         .post_title {
             font-size: 30px;
@@ -31,7 +34,7 @@
         <!-- Sidebar Navigation end-->
         <div class="page-content">
             @if (session()->has('message'))
-                <div class="alert alert-success" role="alert">
+                <div class="alert alert-danger" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
                     {{ session()->get('message') }}
                 </div>
@@ -80,27 +83,42 @@
                                                         <td>{{ $post->created_at->format('Y-m-d') }}</td>
                                                         <td>{{ $post->updated_at->format('Y-m-d') }}</td>
                                                         <td style="display: inline-flex;">
-                                                            <a href="{{ route('posts.show', $post->id) }}"
-                                                                class="btn btn-info ">View</a>
-                                                            <a href="{{ route('posts.edit', $post->id) }}"
-                                                                class="btn btn-primary ">Edit</a>
-                                                            <form action="{{ route('posts.destroy', $post->id) }}"
-                                                                method="POST" class="d-inline delete_form">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button onclick="checker()" type="submit"
-                                                                    class="btn btn-danger confirm_delete p-2">Delete</button>
-                                                            </form>
+                                                            <div style="padding: 5px;">
+                                                                <a href="{{ url('edit_page', $post->id) }}"
+                                                                    class="btn btn-success ">Edit</a>
+                                                            </div>
+                                                            <div style=" padding: 5px;">
+                                                                <form id="delete_form_{{ $post->id }}"
+                                                                    action="{{ url('delete_post', $post->id) }}"
+                                                                    method="POST" class="d-inline delete_form">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button
+                                                                        onclick="checker(event,{{ $post->id }})"
+                                                                        type="submit"
+                                                                        class="btn btn-danger confirm_delete p-2">Delete</button>
+                                                                </form>
+                                                            </div>
                                                         </td>
                                                     </tr>
-                                                    <script>
-                                                        function checker() {
-                                                            var result = confirm("Are you sure to delete this post?");
-                                                            if (result == false) {
-                                                                event.preventDefault();
-                                                            } else {
-                                                                $('.delete_form').submit();
-                                                            }
+                                                    <script type="text/javascript">
+                                                        function checker(ev, postId) {
+                                                            ev.preventDefault();
+                                                            var urlToRedirect = ev.currentTarget.getAttribute('href');
+                                                            swal({
+                                                                title: 'Are you sure to delete this post?',
+                                                                text: "You won't be able to revert this!",
+                                                                icon: 'warning',
+                                                                buttons: true,
+                                                                dangerMode: true,
+                                                            }).then((willDelete) => {
+                                                                if (willDelete) {
+                                                                    var form = $('#delete_form_' + postId);
+                                                                    form.submit();
+                                                                } else {
+                                                                    swal("Your data is safe!");
+                                                                }
+                                                            });
                                                         }
                                                     </script>
                                                 @endforeach

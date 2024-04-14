@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,13 +25,13 @@ require __DIR__ . '/auth.php';
 
 // Posts routes old version
 
-Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
-Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
-Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
-Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
-Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
-Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
-Route::delete('/posts/{post}', [PostController::class, 'destroy'])->middleware(['auth', 'admin'])->name('posts.destroy');
+// Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+// Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+// Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+// Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+// Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
+// Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
+// Route::delete('/posts/{post}', [PostController::class, 'destroy'])->middleware(['auth', 'admin'])->name('posts.destroy');
 
 // New Version Posts routes
 
@@ -40,4 +39,5 @@ Route::get('/dashboardAdmin', [AdminController::class, 'homeAdmin'])->middleware
 Route::get('/post_page', [AdminController::class, 'post_page'])->name('admin.post_page');
 Route::post('/add_post', [AdminController::class, 'add_post'])->name('admin.add_post');
 Route::get('/show_post', [AdminController::class, 'show_post'])->name('admin.show_post');
-Route::get('/Delete_post/{id}', [AdminController::class, 'Delete_post'])->name('admin.Delete_post');
+Route::delete('/delete_post/{id}', [AdminController::class, 'delete_post'])->middleware(['auth', 'verified', 'admin'])->name('admin.delete_post');
+Route::get('/edit_page', [AdminController::class, 'edit_page'])->name('admin.edit_page');

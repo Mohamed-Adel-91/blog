@@ -14,7 +14,6 @@ class AdminController extends Controller
         $user = Auth::user();
         $username = $user->name;
         $userType = $user->user_type;
-
         return view('admin.homeAdmin', compact('username', 'userType'));
     }
     public function post_page()
@@ -49,7 +48,6 @@ class AdminController extends Controller
         } else {
             $post->image = 'null.png';
         }
-
         $post->save();
         return redirect()->back()->with('message', 'Post Added Successfully!');
     }
@@ -61,6 +59,19 @@ class AdminController extends Controller
         $username = $user->name;
         $userType = $user->user_type;
         return view('admin.show_post', compact(['posts', 'username', 'userType']))->with('posts', Post::orderBy('created_at', 'desc')->paginate(10));
+    }
+
+    public function delete_post($id)
+    {
+        $post = Post::findOrFail($id);
+        $post->delete();
+        return redirect()->back()->with('message', 'Post Deleted Successfully!');
+    }
+
+    public function edit_page($id)
+    {
+        $post = Post::findOrFail($id);
+        return view('admin.edit_page', compact('post'));
     }
 
 }

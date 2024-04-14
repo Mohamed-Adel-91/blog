@@ -79,7 +79,7 @@ class PostController extends Controller
         ]);
 
         // 4. Redirect to the home page with a success message...
-        return redirect(route('admin.show_post'))->with('success', 'Your blog post has been saved!');
+        return redirect(route('admin.show_post'))->with('message', 'Your blog post has been saved!');
     }
 
     //-------------------------------------- Edit -----------------------------------------------
@@ -118,7 +118,7 @@ class PostController extends Controller
         ]);
 
         // 4. Redirect to the home page with a success message...
-        return redirect(route('posts.show', $postId))->with('success', 'Your blog post has been updated!');
+        return redirect(route('posts.show', $postId))->with('message', 'Your blog post has been updated!');
     }
 
     //-------------------------------------- Destroy -----------------------------------------------
@@ -129,6 +129,6 @@ class PostController extends Controller
         $singlePostFromDB->delete();
 
         //2. Redirect to the home page with a success message...
-        return redirect(route('admin.show_post'))->with('success', 'Your blog post has been Deleted!');
+        return redirect(route('admin.show_post'))->with('message', 'Your blog post has been Deleted!');
     }
 }
