@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class AdminController extends Controller
 {
@@ -75,6 +76,56 @@ class AdminController extends Controller
         $username = $user->name;
         $userType = $user->user_type;
         return view('admin.edit_page', compact('post', 'username', 'userType'));
+    }
+
+    public function show_one_post($id)
+    {
+        $post = Post::findOrFail($id);
+        $user = Auth::user();
+        $username = $user->name;
+        $userType = $user->user_type;
+        return view('admin.show_one_post', compact('post', 'username', 'userType'));
+    }
+
+    public function update_post(Request $request, $id)
+    {
+        // 1. Validate the request...
+        $request->validate([
+            'title' => 'required|min:3',
+            'description' => 'required|min:3',
+            'image' => 'max:2048', // Add image validation rules
+        ]);
+
+        // 2. Get the data from the request...
+        $data = Post::findOrFail($id);
+        $data->title = $request->title;
+        $data->description = $request->description;
+        $image = $request->file('image'); // Retrieve the file object
+
+        if ($image) {
+            $destinationPath = "uploads/images";
+            $extension = $image->getClientOriginalExtension();
+            $fileName = time() . "." . $extension;
+
+            // Move the uploaded image to the destination path
+            $image->move($destinationPath, $fileName);
+
+            // Delete the old image if it exists
+            $oldImage = $data->image;
+            if ($oldImage !== "null.png") {
+                File::delete(public_path("uploads/images/" . $oldImage));
+            }
+
+            $data->image = $fileName;
+        } else {
+            unset($data->image);
+        }
+
+        // 3. update the blog post in the database...
+        $data->save();
+
+        // 4. Redirect to the home page with a success message...
+        return redirect(route('admin.show_one_post', $id))->with('message', 'Your blog post has been updated!');
     }
 
 }

@@ -33,6 +33,15 @@
         @include('admin.sidebar')
         <!-- Sidebar Navigation end-->
         <div class="page-content">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             @if (session()->has('message'))
                 <div class="alert alert-danger" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
@@ -71,7 +80,7 @@
                                                     <tr>
                                                         <th scope="row">{{ $post->id }}</th>
                                                         <td>{{ $post->title }}</td>
-                                                        <td>{{ $post->description }}</td>
+                                                        <td>{{ Str::limit($post->description, 50) }}</td>
                                                         <td>{{ $post->name }}</td>
                                                         <td>{{ $post->post_status }}</td>
                                                         <td>{{ $post->user_type }}</td>
@@ -83,6 +92,10 @@
                                                         <td>{{ $post->created_at->format('Y-m-d') }}</td>
                                                         <td>{{ $post->updated_at->format('Y-m-d') }}</td>
                                                         <td style="display: inline-flex;">
+                                                            <div style="padding: 5px;">
+                                                                <a href="{{ url('show_one_post', $post->id) }}"
+                                                                    class="btn btn-info ">Veiw</a>
+                                                            </div>
                                                             <div style="padding: 5px;">
                                                                 <a href="{{ url('edit_page', $post->id) }}"
                                                                     class="btn btn-success ">Edit</a>

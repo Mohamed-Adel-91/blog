@@ -35,9 +35,18 @@
         @include('admin.sidebar')
         <!-- Sidebar Navigation end-->
         <div class="page-content">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="container">
                 <h1 class="post_title">Update post no. {{ $post->id }}</h1>
-                <form method="POST" action="">
+                <form method="POST" action="{{ url('update_post', $post->id) }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
                     @csrf
@@ -51,8 +60,10 @@
                         <label for="floatingTextarea2">Description</label>
                         <textarea name="description" class="form-control" id="floatingTextarea2" style="height: 200px">{{ $post->description }}</textarea>
                     </div>
-                    <div>
-                        <img src="/public/uploads/images/{{ $post->image }}" alt="...">
+                    <div class="div_center">
+                        <label for="oldImage" class="form-label">old Image</label>
+                        <img height="250px" id="oldImage" width="250px" src="/uploads/images/{{ $post->image }}"
+                            alt="...">
                     </div>
                     <div class="div_center">
                         <label for="image" class="form-label">Update old Image</label>
