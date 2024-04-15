@@ -71,7 +71,10 @@ class AdminController extends Controller
     public function edit_page($id)
     {
         $post = Post::findOrFail($id);
-        return view('admin.edit_page', compact('post'));
+        $user = Auth::user();
+        $username = $user->name;
+        $userType = $user->user_type;
+        return view('admin.edit_page', compact('post', 'username', 'userType'));
     }
 
 }

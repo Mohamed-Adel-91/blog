@@ -61,7 +61,6 @@
                     <div class="div_center">
                         <input type="submit" class="btn btn-primary">
                     </div>
-
                 </form>
             </div>
             @include('admin.footer')

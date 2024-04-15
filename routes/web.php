@@ -39,5 +39,5 @@ Route::get('/dashboardAdmin', [AdminController::class, 'homeAdmin'])->middleware
 Route::get('/post_page', [AdminController::class, 'post_page'])->name('admin.post_page');
 Route::post('/add_post', [AdminController::class, 'add_post'])->name('admin.add_post');
 Route::get('/show_post', [AdminController::class, 'show_post'])->name('admin.show_post');
+Route::get('/edit_page/{id}', [AdminController::class, 'edit_page'])->name('admin.edit_page');
 Route::delete('/delete_post/{id}', [AdminController::class, 'delete_post'])->middleware(['auth', 'verified', 'admin'])->name('admin.delete_post');
-Route::get('/edit_page', [AdminController::class, 'edit_page'])->name('admin.edit_page');
