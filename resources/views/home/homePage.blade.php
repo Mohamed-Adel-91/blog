@@ -16,7 +16,7 @@
     </div>
     <!-- header section end -->
     <!-- services section start -->
-    @include('home.services')
+    @include('home.blogs')
     <!-- services section end -->
     <!-- about section start -->
     @include('home.about')

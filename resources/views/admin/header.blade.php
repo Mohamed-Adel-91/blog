@@ -1,3 +1,5 @@
+{{-- @extends('admin.homeAdmin') --}}
+{{-- @section('header') --}}
 <header class="header">
     <nav class="navbar navbar-expand-lg">
         <div class="search-panel">
@@ -310,3 +312,4 @@
         </div>
     </nav>
 </header>
+{{-- @endsection --}}

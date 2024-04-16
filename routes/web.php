@@ -5,21 +5,21 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// })->name('homePage');
-
-// Home routes
-
-Route::get('/', [HomeController::class, 'homepage'])->name('home');
-Route::get('/dashboardAdmin', [HomeController::class, 'index'])->middleware(['auth', 'verified', 'admin'])->name('dashboardAdmin');
-Route::get('/dashboard', function () {return view('dashboard');})->middleware(['auth', 'verified', 'client'])->name('dashboard');
+// profile routes
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// Home routes
+
+Route::get('/', [HomeController::class, 'homepage'])->name('home');
+Route::get('/dashboardAdmin', [HomeController::class, 'index'])->middleware(['auth', 'verified', 'admin'])->name('dashboardAdmin');
+Route::get('/dashboard', function () {return view('dashboard');})->middleware(['auth', 'verified', 'client'])->name('dashboard');
+Route::get('/blogs', [HomeController::class, 'blogs'])->name('home.blogs');
+Route::get('/show_blog/{id}', [HomeController::class, 'show_blog'])->name('home.show_blog');
 
 require __DIR__ . '/auth.php';
 

@@ -29,3 +29,31 @@
 <link rel="stylesheet" href="css/owl.theme.default.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
     media="screen">
+<style>
+    .card {
+        border: none;
+        box-shadow: none;
+        height: 100%;
+        /* Ensures all cards have the same height */
+    }
+
+    .card-body {
+        height: 150px;
+    }
+
+    .services_img {
+        max-height: 100%;
+        /* Adjust the image height to fit within the card body */
+        width: auto;
+        /* Maintain aspect ratio */
+    }
+
+    .div_center {
+        display: inline-block;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 25px;
+        width: fit-content;
+    }
+</style>
