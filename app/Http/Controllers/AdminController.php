@@ -26,6 +26,13 @@ class AdminController extends Controller
     }
     public function add_post(Request $request)
     {
+        // 1. Validate the request...
+        $request->validate([
+            'title' => 'required|min:3',
+            'description' => 'required|min:3',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
         $user = Auth()->user();
         $user_id = $user->id;
         $name = $user->name;
@@ -66,7 +73,7 @@ class AdminController extends Controller
     {
         $post = Post::findOrFail($id);
         $post->delete();
-        return redirect()->back()->with('message', 'Post Deleted Successfully!');
+        return redirect(route('admin.show_post'))->with('message', 'Post Deleted Successfully!');
     }
 
     public function edit_page($id)
@@ -93,7 +100,7 @@ class AdminController extends Controller
         $request->validate([
             'title' => 'required|min:3',
             'description' => 'required|min:3',
-            'image' => 'max:2048', // Add image validation rules
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         // 2. Get the data from the request...

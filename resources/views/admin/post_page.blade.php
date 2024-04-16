@@ -35,6 +35,15 @@
         @include('admin.sidebar')
         <!-- Sidebar Navigation end-->
         <div class="page-content ">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             @if (session()->has('message'))
                 <div class="alert alert-success" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
@@ -48,11 +57,11 @@
                     <div class="div_center">
                         <label for="title" class="form-label">Title</label>
                         <input type="text" id="title" name="title" required class="form-control"
-                            placeholder="Enter the title">
+                            value="{{ old('title') }}" placeholder="Enter the title">
                     </div>
                     <div class="div_center">
                         <label for="description" class="form-label">Post Description</label>
-                        <textarea id="description" name="description" required class="form-control" placeholder="Enter the description"></textarea>
+                        <textarea id="description" name="description" required class="form-control" placeholder="Enter the description">{{ old('description') }}</textarea>
                     </div>
                     <div class="div_center">
                         <label for="image" class="form-label">Add Image</label>
