@@ -20,6 +20,7 @@ Route::get('/dashboardAdmin', [HomeController::class, 'index'])->middleware(['au
 Route::get('/dashboard', function () {return view('dashboard');})->middleware(['auth', 'verified', 'client'])->name('dashboard');
 Route::get('/blogs', [HomeController::class, 'blogs'])->name('home.blogs');
 Route::get('/blog_details/{id}', [HomeController::class, 'blog_details'])->name('home.blog_details');
+Route::post('/client_add_post', [HomeController::class, 'client_add_post'])->name('client_add_post');
 
 require __DIR__ . '/auth.php';
 

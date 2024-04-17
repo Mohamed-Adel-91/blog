@@ -13,7 +13,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/">Home</a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="#">About</a>
                         </li>
                         <li class="nav-item">
@@ -21,9 +21,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link " href="#">Blog</a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
-                            <a class="nav-link " href="#">Contact</a>
+                            <a class="nav-link " href="/dashboard">Add Posts</a>
                         </li>
                         @if (Route::has('login'))
                             @auth
@@ -71,10 +71,10 @@
             <div class="menu_main">
                 <ul>
                     <li class="active"><a href="/">Home</a></li>
-                    <li><a href="#">About</a></li>
+                    {{-- <li><a href="#">About</a></li>
                     <li><a href="#">Services</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Contact us</a></li>
+                    <li><a href="#">Blog</a></li> --}}
+                    <li><a href="/dashboard">Add Posts</a></li>
                     @if (Route::has('login'))
                         @auth
                             @if (Auth::user()->user_type == 'admin')
@@ -90,7 +90,7 @@
                                     </form>
                                 </li>
                             @elseif (Auth::user()->user_type == 'client')
-                                <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
+                                <li><a href="{{ url('/profile') }}">profile</a></li>
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
