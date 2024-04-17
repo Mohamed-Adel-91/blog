@@ -15,15 +15,15 @@
         <!-- banner section end -->
     </div>
     <!-- header section end -->
-    <!-- services section start -->
+    <!-- blogs section start -->
     @include('home.blogs')
-    <!-- services section end -->
+    <!-- blogs section end -->
     <!-- about section start -->
     @include('home.about')
     <!-- about section end -->
-    <!-- blog section start -->
-    @include('home.blog')
-    <!-- blog section end -->
+    <!-- video section start -->
+    @include('home.video')
+    <!-- video section end -->
     <!-- client section start -->
     @include('home.client')
     <!-- client section end -->

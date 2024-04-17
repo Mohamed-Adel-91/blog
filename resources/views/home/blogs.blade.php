@@ -8,18 +8,18 @@
                 @foreach ($posts as $post)
                     <div class="col-md-4">
                         <div class="card">
-                            <div style="width: 200px; height: 200px; margin: auto;">
-                                <img src="uploads/images/{{ $post->image }}" class="services_img" width="500px"
-                                    height="500px" alt="...">
+                            <div>
+                                <img src="uploads/images/{{ $post->image }}" class="services_img" style="height: 250px;"
+                                    alt="...">
                             </div>
                             <div class="card-body text-center">
-                                <h3 class="card-title">{{ $post->title }}</h3>
+                                <h2 class="card-title" style="height: 70px;">{{ $post->title }}</h2>
                                 <footer class="blockquote-footer">Created By :
                                     <cite title="Source Title">{{ $post->name }}</cite>
                                 </footer>
                             </div>
-                            <div class="btn_main">
-                                <a href="#">Read More</a>
+                            <div class="btn_main" style="padding-top: 20px;">
+                                <a href="{{ url('blog_details', $post->id) }}">Read More</a>
                             </div>
                         </div>
                     </div>

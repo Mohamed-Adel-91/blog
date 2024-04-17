@@ -38,7 +38,7 @@
     }
 
     .card-body {
-        height: 150px;
+        height: 75px;
     }
 
     .services_img {
@@ -49,11 +49,11 @@
     }
 
     .div_center {
-        display: inline-block;
+        display: flex;
         justify-content: center;
         align-items: center;
         text-align: center;
-        padding: 25px;
-        width: fit-content;
+        padding-top: 60px;
+
     }
 </style>

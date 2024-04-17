@@ -11,19 +11,19 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home</a>
+                            <a class="nav-link" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">About</a>
+                            <a class="nav-link" href="#">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="services.html">Services</a>
+                            <a class="nav-link" href="#">Services</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="blog.html">Blog</a>
+                            <a class="nav-link " href="#">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="contact.html">Contact</a>
+                            <a class="nav-link " href="#">Contact</a>
                         </li>
                         @if (Route::has('login'))
                             @auth
@@ -46,11 +46,11 @@
             <div class="logo"><a href="/"><img src="images/logo.png"></a></div>
             <div class="menu_main">
                 <ul>
-                    <li class="active"><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Contact us</a></li>
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contact us</a></li>
                     @if (Route::has('login'))
                         @auth
                             @if (Auth::user()->user_type == 'admin')

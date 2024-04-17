@@ -19,7 +19,7 @@ Route::get('/', [HomeController::class, 'homepage'])->name('home');
 Route::get('/dashboardAdmin', [HomeController::class, 'index'])->middleware(['auth', 'verified', 'admin'])->name('dashboardAdmin');
 Route::get('/dashboard', function () {return view('dashboard');})->middleware(['auth', 'verified', 'client'])->name('dashboard');
 Route::get('/blogs', [HomeController::class, 'blogs'])->name('home.blogs');
-Route::get('/show_blog/{id}', [HomeController::class, 'show_blog'])->name('home.show_blog');
+Route::get('/blog_details/{id}', [HomeController::class, 'blog_details'])->name('home.blog_details');
 
 require __DIR__ . '/auth.php';
 

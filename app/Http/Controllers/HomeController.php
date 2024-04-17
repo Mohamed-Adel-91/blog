@@ -35,4 +35,13 @@ class HomeController extends Controller
         $userType = $user->user_type;
         return view('home.homePage', compact(['posts', 'username', 'userType']))->with('posts', Post::orderBy('created_at', 'desc')->paginate(3));
     }
+
+    public function blog_details($id)
+    {
+        $post = Post::findOrFail($id);
+        $user = Auth::user();
+
+        return view('home.blog_details', compact('post'));
+    }
+
 }

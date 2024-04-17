@@ -28,7 +28,7 @@ class AdminController extends Controller
     {
         // 1. Validate the request...
         $request->validate([
-            'title' => 'required|min:3',
+            'title' => 'required|min:3|max:100',
             'description' => 'required|min:3',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -98,7 +98,7 @@ class AdminController extends Controller
     {
         // 1. Validate the request...
         $request->validate([
-            'title' => 'required|min:3',
+            'title' => 'required|min:3|max:100',
             'description' => 'required|min:3',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
