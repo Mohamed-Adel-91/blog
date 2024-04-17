@@ -29,8 +29,32 @@
                             @auth
                                 @if (Auth::user()->user_type == 'admin')
                                     <li><a href="{{ url('/dashboardAdmin') }}">Dashboard</a></li>
+                                    <li>
+                                    <li>
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <x-dropdown-link :href="route('logout')"
+                                                onclick="event.preventDefault();
+                                                                        this.closest('form').submit();">
+                                                {{ __('Log Out') }}
+                                            </x-dropdown-link>
+                                        </form>
+                                    </li>
+                                    </li>
                                 @elseif (Auth::user()->user_type == 'client')
                                     <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
+                                    <li>
+                                    <li>
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <x-dropdown-link :href="route('logout')"
+                                                onclick="event.preventDefault();
+                                                                        this.closest('form').submit();">
+                                                {{ __('Log Out') }}
+                                            </x-dropdown-link>
+                                        </form>
+                                    </li>
+                                    </li>
                                 @endif
                             @else
                                 <li><a href="{{ route('login') }}">Login</a></li>
@@ -55,8 +79,28 @@
                         @auth
                             @if (Auth::user()->user_type == 'admin')
                                 <li><a href="{{ url('/dashboardAdmin') }}">Dashboard</a></li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <x-dropdown-link :href="route('logout')"
+                                            onclick="event.preventDefault();
+                                                                    this.closest('form').submit();">
+                                            {{ __('Log Out') }}
+                                        </x-dropdown-link>
+                                    </form>
+                                </li>
                             @elseif (Auth::user()->user_type == 'client')
                                 <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <x-dropdown-link :href="route('logout')"
+                                            onclick="event.preventDefault();
+                                                                    this.closest('form').submit();">
+                                            {{ __('Log Out') }}
+                                        </x-dropdown-link>
+                                    </form>
+                                </li>
                             @endif
                         @else
                             <li><a href="{{ route('login') }}">Login</a></li>

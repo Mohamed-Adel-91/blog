@@ -40,7 +40,6 @@ class HomeController extends Controller
     {
         $post = Post::findOrFail($id);
         $user = Auth::user();
-
         return view('home.blog_details', compact('post'));
     }
 
