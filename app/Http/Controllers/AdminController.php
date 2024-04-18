@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -133,6 +134,64 @@ class AdminController extends Controller
 
         // 4. Redirect to the home page with a success message...
         return redirect(route('admin.show_one_post', $id))->with('message', 'Your blog post has been updated!');
+    }
+
+    public function show_pending_post()
+    {
+        $posts = Post::where('post_status', '=', 'Pending')->get();
+        $user = Auth::user();
+        $username = $user->name;
+        $userType = $user->user_type;
+        return view('admin.show_post', compact(['posts', 'username', 'userType']))->with('posts', Post::orderBy('created_at', 'desc')->paginate(10));
+    }
+
+    public function edit_pending_post($id)
+    {
+        $post = Post::findOrFail($id);
+        $user = Auth::user();
+        $username = $user->name;
+        $userType = $user->user_type;
+        return view('admin.edit_page', compact('post', 'username', 'userType'));
+    }
+    public function update_pending_post()
+    {
+
+    }
+
+    public function filterPosts(Request $request)
+    {
+        $query = Post::query();
+        $user = Auth::user();
+        $username = $user->name;
+        $userType = $user->user_type;
+
+        if ($request->filled('title')) {
+            $query->where('title', 'like', '%' . $request->input('title') . '%');
+        }
+
+        if ($request->filled('post_status')) {
+            $query->where('post_status', $request->input('post_status'));
+        }
+
+        if ($request->filled('start_date') && $request->filled('end_date')) {
+            $start_date = Carbon::parse($request->input('start_date'))->startOfDay();
+            $end_date = Carbon::parse($request->input('end_date'))->endOfDay();
+            $query->where(function ($query) use ($start_date, $end_date) {
+                $query->whereBetween('created_at', [$start_date, $end_date])
+                    ->orWhereBetween('updated_at', [$start_date, $end_date]);
+            });
+        }
+
+        if ($request->filled('sort_by') && in_array($request->sort_by, ['created_at', 'updated_at'])) {
+            $query->orderBy($request->sort_by, $request->input('sort_order', 'desc'));
+        } else {
+            // Default sorting
+            $query->orderBy('created_at', 'desc');
+        }
+
+        $posts = $query->paginate(10);
+
+        return view('admin.show_post', compact('posts', 'username', 'userType'));
     }
 
 }

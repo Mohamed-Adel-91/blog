@@ -46,44 +46,21 @@
                                 <img src="adminTemplate/img/avatar-3.jpg" alt="..." class="img-fluid" />
                                 <div class="status online"></div>
                             </div>
+                            {{-- @foreach ($posts as $post) --}}
                             <div class="content">
                                 <strong class="d-block">Nadia Halsey</strong><span class="d-block">lorem ipsum dolor
                                     sit amit</span><small class="date d-block">9:30am</small>
                             </div>
-                        </a><a href="#" class="dropdown-item message d-flex align-items-center">
-                            <div class="profile">
-                                <img src="adminTemplate/img/avatar-2.jpg" alt="..." class="img-fluid" />
-                                <div class="status away"></div>
-                            </div>
-                            <div class="content">
-                                <strong class="d-block">Peter Ramsy</strong><span class="d-block">lorem ipsum dolor
-                                    sit amit</span><small class="date d-block">7:40am</small>
-                            </div>
-                        </a><a href="#" class="dropdown-item message d-flex align-items-center">
-                            <div class="profile">
-                                <img src="adminTemplate/img/avatar-1.jpg" alt="..." class="img-fluid" />
-                                <div class="status busy"></div>
-                            </div>
-                            <div class="content">
-                                <strong class="d-block">Sam Kaheil</strong><span class="d-block">lorem ipsum dolor
-                                    sit amit</span><small class="date d-block">6:55am</small>
-                            </div>
-                        </a><a href="#" class="dropdown-item message d-flex align-items-center">
-                            <div class="profile">
-                                <img src="adminTemplate/img/avatar-5.jpg" alt="..." class="img-fluid" />
-                                <div class="status offline"></div>
-                            </div>
-                            <div class="content">
-                                <strong class="d-block">Sara Wood</strong><span class="d-block">lorem ipsum dolor
-                                    sit amit</span><small class="date d-block">10:30pm</small>
-                            </div>
-                        </a><a href="#" class="dropdown-item text-center message">
+                            {{-- @endforeach --}}
+                        </a>
+                        <a href="#" class="dropdown-item text-center message">
                             <strong>See All Messages
-                                <i class="fa fa-angle-right"></i></strong></a>
+                                <i class="fa fa-angle-right"></i></strong>
+                        </a>
                     </div>
                 </div>
                 <!-- Tasks-->
-                <div class="list-inline-item dropdown">
+                {{-- <div class="list-inline-item dropdown">
                     <a id="navbarDropdownMenuLink2" href="http://example.com" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false" class="nav-link tasks-toggle"><i
                             class="icon-new-file"></i><span class="badge dashbg-3">9</span></a>
@@ -132,12 +109,11 @@
                             <strong>See All Tasks
                                 <i class="fa fa-angle-right"></i></strong></a>
                     </div>
-                </div>
+                </div> --}}
                 <!-- Tasks end-->
                 <!-- Megamenu-->
-                <div class="list-inline-item dropdown menu-large">
-                    <a href="#" data-toggle="dropdown" class="nav-link">Mega <i
-                            class="fa fa-ellipsis-v"></i></a>
+                {{-- <div class="list-inline-item dropdown menu-large">
+                    <a href="#" data-toggle="dropdown" class="nav-link">Mega <i class="fa fa-ellipsis-v"></i></a>
                     <div class="dropdown-menu megamenu">
                         <div class="row">
                             <div class="col-lg-3 col-md-6">
@@ -276,7 +252,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <!-- Megamenu end     -->
                 <!-- Languages dropdown    -->
                 <div class="list-inline-item dropdown">
@@ -287,8 +263,8 @@
                     <div aria-labelledby="languages" class="dropdown-menu">
                         <a rel="nofollow" href="#" class="dropdown-item">
                             <img src="adminTemplate/img/flags/germany.png" style="width: 20px; height: 20px;"
-                                alt="German" class="mr-2" /><span>German</span></a><a rel="nofollow"
-                            href="#" class="dropdown-item">
+                                alt="German" class="mr-2" /><span>German</span></a><a rel="nofollow" href="#"
+                            class="dropdown-item">
                             <img src="adminTemplate/img/flags/france.png" style="width: 20px; height: 20px;"
                                 alt="French" class="mr-2" /><span>French
                             </span></a><a rel="nofollow" href="#" class="dropdown-item">

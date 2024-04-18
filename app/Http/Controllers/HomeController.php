@@ -23,17 +23,21 @@ class HomeController extends Controller
 
     public function homepage()
     {
-        $posts = Post::all();
-        return view('home.homePage', compact('posts'))->with('posts', Post::orderBy('created_at', 'desc')->paginate(3));
+        $posts = Post::where('post_status', '=', 'Active')
+            ->orderBy('created_at', 'desc') // asc or desc
+            ->paginate(3);
+        return view('home.homePage', compact('posts'));
     }
 
     public function blogs()
     {
-        $posts = Post::all();
+        $posts = Post::where('post_status', '=', 'Active')
+            ->orderBy('created_at', 'desc') // asc or desc
+            ->paginate(3);
         $user = Auth::user();
         $username = $user->name;
         $userType = $user->user_type;
-        return view('home.homePage', compact(['posts', 'username', 'userType']))->with('posts', Post::orderBy('created_at', 'desc')->paginate(3));
+        return view('home.homePage', compact(['posts', 'username', 'userType']));
     }
 
     public function blog_details($id)

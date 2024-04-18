@@ -29,11 +29,11 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         if ($request->user()->user_type === 'admin') {
-            return redirect('dashboardAdmin');
+            return redirect(route('home'));
         } elseif ($request->user()->user_type === 'client') {
-            return redirect('dashboard');
+            return redirect(route('home'));
         }
-        return redirect()->intended(route('homePage'));
+        return redirect()->intended(route('home'));
     }
 
     /**

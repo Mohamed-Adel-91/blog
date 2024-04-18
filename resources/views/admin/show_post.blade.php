@@ -58,6 +58,68 @@
                                     <div class="title">
                                         <strong>All Posts Table</strong>
                                     </div>
+                                    <form action="{{ route('filter_posts') }}" method="GET">
+                                        @csrf
+                                        @method('GET')
+                                        <div class="form-row">
+                                            <div class="form-group col-md-3">
+                                                <label for="title">Title</label>
+                                                <input type="text" class="form-control" id="title" name="title"
+                                                    value="{{ old('title') }}">
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="post_status">Post Status</label>
+                                                <select class="form-control" id="post_status" name="post_status">
+                                                    <option value=""
+                                                        {{ old('post_status') == '' ? 'selected' : '' }}>Show all Status
+                                                    </option>
+                                                    <option value="Active"
+                                                        {{ old('post_status') == 'Active' ? 'selected' : '' }}>Active
+                                                    </option>
+                                                    <option value="Pending"
+                                                        {{ old('post_status') == 'Pending' ? 'selected' : '' }}>Pending
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="sort_by">Sort By</label>
+                                                <select class="form-control" id="sort_by" name="sort_by">
+                                                    <option value="created_at"
+                                                        {{ old('sort_by') == 'created_at' ? 'selected' : '' }}>Created
+                                                        At</option>
+                                                    <option value="updated_at"
+                                                        {{ old('sort_by') == 'updated_at' ? 'selected' : '' }}>Updated
+                                                        At</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="sort_order">Sort Order</label>
+                                                <select class="form-control" id="sort_order" name="sort_order">
+                                                    <option value="desc"
+                                                        {{ old('sort_order') == 'desc' ? 'selected' : '' }}>Descending
+                                                    </option>
+                                                    <option value="asc"
+                                                        {{ old('sort_order') == 'asc' ? 'selected' : '' }}>Ascending
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="start_date">Start Date</label>
+                                                <input type="date" class="form-control" id="start_date"
+                                                    name="start_date" value="{{ old('start_date') }}">
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="end_date">End Date</label>
+                                                <input type="date" class="form-control" id="end_date"
+                                                    name="end_date" value="{{ old('end_date') }}">
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <button type="submit" class="btn btn-primary mt-4">Filter</button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+
                                     <div class="table-responsive">
                                         <table class="table table-striped table-sm">
                                             <thead>
@@ -82,11 +144,13 @@
                                                         <td>{{ $post->title }}</td>
                                                         <td>{{ Str::limit($post->description, 50) }}</td>
                                                         <td>{{ $post->name }}</td>
-                                                        <td>{{ $post->post_status }}</td>
+                                                        <td
+                                                            style="color: {{ $post->post_status == 'Active' ? 'green' : ($post->post_status == 'Pending' ? 'red' : 'black') }}">
+                                                            {{ $post->post_status }}</td>
                                                         <td>{{ $post->user_type }}</td>
                                                         <td>
-                                                            <img src="uploads/images/{{ $post->image }}" alt=""
-                                                                width=50 height=50 />
+                                                            <img src="uploads/images/{{ $post->image }}"
+                                                                alt="" width=50 height=50 />
                                                         </td>
                                                         <td>{{ $post->email }}</td>
                                                         <td>{{ $post->created_at->format('Y-m-d') }}</td>

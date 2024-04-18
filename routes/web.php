@@ -24,6 +24,21 @@ Route::post('/client_add_post', [HomeController::class, 'client_add_post'])->nam
 
 require __DIR__ . '/auth.php';
 
+// New Version Posts routes
+
+Route::get('/dashboardAdmin', [AdminController::class, 'homeAdmin'])->middleware(['auth', 'verified', 'admin'])->name('admin.homeAdmin');
+Route::get('/post_page', [AdminController::class, 'post_page'])->name('admin.post_page');
+Route::post('/add_post', [AdminController::class, 'add_post'])->name('admin.add_post');
+Route::get('/show_post', [AdminController::class, 'show_post'])->name('admin.show_post');
+Route::get('/show_one_post/{id}', [AdminController::class, 'show_one_post'])->name('admin.show_one_post');
+Route::get('/edit_page/{id}', [AdminController::class, 'edit_page'])->name('admin.edit_page');
+Route::put('/update_post/{id}', [AdminController::class, 'update_post'])->name('admin.update_post');
+Route::delete('/delete_post/{id}', [AdminController::class, 'delete_post'])->middleware(['auth', 'verified', 'admin'])->name('admin.delete_post');
+Route::get('/show_pending_post ', [AdminController::class, 'show_pending_post'])->name('admin.show_pending_post');
+Route::get('/edit_pending_post/{id}', [AdminController::class, 'edit_pending_post'])->name('admin.edit_pending_post');
+Route::put('/update_pending_post/{id}', [AdminController::class, 'update_pending_post'])->name('admin.update_pending_post');
+Route::get('/filter_posts', [AdminController::class, 'filterPosts'])->name('filter_posts');
+
 // Posts routes old version
 
 // Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
@@ -33,14 +48,3 @@ require __DIR__ . '/auth.php';
 // Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
 // Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
 // Route::delete('/posts/{post}', [PostController::class, 'destroy'])->middleware(['auth', 'admin'])->name('posts.destroy');
-
-// New Version Posts routes
-
-Route::get('/dashboardAdmin', [AdminController::class, 'homeAdmin'])->middleware(['auth', 'verified', 'admin'])->name('admin.homeAdmin');
-Route::get('/post_page', [AdminController::class, 'post_page'])->name('admin.post_page');
-Route::post('/add_post', [AdminController::class, 'add_post'])->name('admin.add_post');
-Route::get('/show_post', [AdminController::class, 'show_post'])->name('admin.show_post');
-Route::get('/show_one_post/{id}', [AdminController::class, 'show_one_post'])->name('admin.show_one_post');
-Route::get('/edit_page/{id}', [AdminController::class, 'edit_page'])->name('admin.edit_page');
-Route::delete('/delete_post/{id}', [AdminController::class, 'delete_post'])->middleware(['auth', 'verified', 'admin'])->name('admin.delete_post');
-Route::put('/update_post/{id}', [AdminController::class, 'update_post'])->name('admin.update_post');

@@ -74,10 +74,10 @@
                     {{-- <li><a href="#">About</a></li>
                     <li><a href="#">Services</a></li>
                     <li><a href="#">Blog</a></li> --}}
-                    <li><a href="/dashboard">Add Posts</a></li>
                     @if (Route::has('login'))
                         @auth
                             @if (Auth::user()->user_type == 'admin')
+                                <li><a href="/post_page">Add Posts</a></li>
                                 <li><a href="{{ url('/dashboardAdmin') }}">Dashboard</a></li>
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}">
@@ -90,6 +90,7 @@
                                     </form>
                                 </li>
                             @elseif (Auth::user()->user_type == 'client')
+                                <li><a href="/dashboard">Add Posts</a></li>
                                 <li><a href="{{ url('/profile') }}">profile</a></li>
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}">
