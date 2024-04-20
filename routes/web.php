@@ -37,6 +37,9 @@ Route::delete('/delete_post/{id}', [AdminController::class, 'delete_post'])->mid
 Route::get('/show_pending_post ', [AdminController::class, 'show_pending_post'])->name('admin.show_pending_post');
 Route::get('/edit_pending_post/{id}', [AdminController::class, 'edit_pending_post'])->name('admin.edit_pending_post');
 Route::put('/update_pending_post/{id}', [AdminController::class, 'update_pending_post'])->name('admin.update_pending_post');
+Route::put('/accept_post/{id}', [AdminController::class, 'accept_post'])->name('admin.accept_post');
+Route::put('/reject_post/{id}', [AdminController::class, 'reject_post'])->name('admin.reject_post');
+
 Route::get('/filter_posts', [AdminController::class, 'filterPosts'])->name('filter_posts');
 
 // Posts routes old version

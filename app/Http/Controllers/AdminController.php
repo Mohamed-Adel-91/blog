@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
@@ -156,6 +157,26 @@ class AdminController extends Controller
     public function update_pending_post()
     {
 
+    }
+
+    public function accept_post($id)
+    {
+        $data = Post::findOrFail($id);
+        $data->post_status = "Active";
+        $data->save();
+        Session::flash('message', 'The Blog has been Accepted!');
+        return redirect()->back();
+        // return redirect()->back()->with('message', 'Your blog post has been updated!');
+    }
+
+    public function reject_post($id)
+    {
+        $data = Post::findOrFail($id);
+        $data->post_status = "Rejected";
+        $data->save();
+        Session::flash('message', 'The Blog has been Rejected!');
+        return redirect()->back();
+        // return redirect()->back()->with('message', 'Your blog post has been updated!');
     }
 
     public function filterPosts(Request $request)

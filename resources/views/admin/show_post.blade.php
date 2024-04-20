@@ -3,27 +3,7 @@
 
 <head>
     @include('admin.adminCss')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
-        integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <style>
-        .post_title {
-            font-size: 30px;
-            font-weight: bold;
-            text-align: center;
-            color: #fff;
-            padding: 30px;
-        }
-
-        .div_center {
-            display: inline-block;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 25px;
-            width: fit-content;
-        }
-    </style>
+    @include('admin.show_post_css')
 </head>
 
 <body>
@@ -50,6 +30,66 @@
             @endif
             <h1 class="post_title">Show All Posts</h1>
             <div class="page-content div_center">
+                <div class="sidebar">
+                    <!-- Existing sidebar content (e.g., navigation links, user profile) -->
+
+                    <!-- Add the filter form here -->
+                    <form action="{{ route('filter_posts') }}" method="GET">
+                        @csrf
+                        @method('GET')
+                        <div class="form-row">
+                            <div class="form-group col-md-2"> <!-- Adjusted the width to fit the sidebar -->
+                                <label for="title">Title</label>
+                                <input type="text" class="form-control" id="title" name="title"
+                                    value="{{ old('title') }}">
+                            </div>
+                            <div class="form-group col-md-2"> <!-- Adjusted the width to fit the sidebar -->
+                                <label for="post_status">Post Status</label>
+                                <select class="form-control" id="post_status" name="post_status">
+                                    <option value="" {{ old('post_status') == '' ? 'selected' : '' }}>Show all
+                                        Status</option>
+                                    <option value="Active" {{ old('post_status') == 'Active' ? 'selected' : '' }}>Active
+                                    </option>
+                                    <option value="Pending" {{ old('post_status') == 'Pending' ? 'selected' : '' }}>
+                                        Pending</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-2"> <!-- Adjusted the width to fit the sidebar -->
+                                <label for="sort_by">Sort By</label>
+                                <select class="form-control" id="sort_by" name="sort_by">
+                                    <option value="created_at" {{ old('sort_by') == 'created_at' ? 'selected' : '' }}>
+                                        Created At</option>
+                                    <option value="updated_at" {{ old('sort_by') == 'updated_at' ? 'selected' : '' }}>
+                                        Updated At</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-2"> <!-- Adjusted the width to fit the sidebar -->
+                                <label for="sort_order">Sort Order</label>
+                                <select class="form-control" id="sort_order" name="sort_order">
+                                    <option value="desc" {{ old('sort_order') == 'desc' ? 'selected' : '' }}>
+                                        Descending</option>
+                                    <option value="asc" {{ old('sort_order') == 'asc' ? 'selected' : '' }}>Ascending
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-2"> <!-- Adjusted the width to fit the sidebar -->
+                                <label for="start_date">Start Date</label>
+                                <input type="date" class="form-control" id="start_date" name="start_date"
+                                    value="{{ old('start_date') }}">
+                            </div>
+                            <div class="form-group col-md-2"> <!-- Adjusted the width to fit the sidebar -->
+                                <label for="end_date">End Date</label>
+                                <input type="date" class="form-control" id="end_date" name="end_date"
+                                    value="{{ old('end_date') }}">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <button type="submit" class="btn btn-info btn-lg mt-4">Filter</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Existing sidebar content -->
+                </div>
                 <section class="no-padding-top">
                     <div class="container-fluid">
                         <div class="row">
@@ -58,70 +98,8 @@
                                     <div class="title">
                                         <strong>All Posts Table</strong>
                                     </div>
-                                    <form action="{{ route('filter_posts') }}" method="GET">
-                                        @csrf
-                                        @method('GET')
-                                        <div class="form-row">
-                                            <div class="form-group col-md-3">
-                                                <label for="title">Title</label>
-                                                <input type="text" class="form-control" id="title" name="title"
-                                                    value="{{ old('title') }}">
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label for="post_status">Post Status</label>
-                                                <select class="form-control" id="post_status" name="post_status">
-                                                    <option value=""
-                                                        {{ old('post_status') == '' ? 'selected' : '' }}>Show all Status
-                                                    </option>
-                                                    <option value="Active"
-                                                        {{ old('post_status') == 'Active' ? 'selected' : '' }}>Active
-                                                    </option>
-                                                    <option value="Pending"
-                                                        {{ old('post_status') == 'Pending' ? 'selected' : '' }}>Pending
-                                                    </option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label for="sort_by">Sort By</label>
-                                                <select class="form-control" id="sort_by" name="sort_by">
-                                                    <option value="created_at"
-                                                        {{ old('sort_by') == 'created_at' ? 'selected' : '' }}>Created
-                                                        At</option>
-                                                    <option value="updated_at"
-                                                        {{ old('sort_by') == 'updated_at' ? 'selected' : '' }}>Updated
-                                                        At</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label for="sort_order">Sort Order</label>
-                                                <select class="form-control" id="sort_order" name="sort_order">
-                                                    <option value="desc"
-                                                        {{ old('sort_order') == 'desc' ? 'selected' : '' }}>Descending
-                                                    </option>
-                                                    <option value="asc"
-                                                        {{ old('sort_order') == 'asc' ? 'selected' : '' }}>Ascending
-                                                    </option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label for="start_date">Start Date</label>
-                                                <input type="date" class="form-control" id="start_date"
-                                                    name="start_date" value="{{ old('start_date') }}">
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label for="end_date">End Date</label>
-                                                <input type="date" class="form-control" id="end_date"
-                                                    name="end_date" value="{{ old('end_date') }}">
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                <button type="submit" class="btn btn-primary mt-4">Filter</button>
-                                            </div>
-                                        </div>
-                                    </form>
-
-
                                     <div class="table-responsive">
-                                        <table class="table table-striped table-sm">
+                                        <table class="table table-sm">
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
@@ -155,27 +133,60 @@
                                                         <td>{{ $post->email }}</td>
                                                         <td>{{ $post->created_at->format('Y-m-d') }}</td>
                                                         <td>{{ $post->updated_at->format('Y-m-d') }}</td>
-                                                        <td style="display: inline-flex;">
-                                                            <div style="padding: 5px;">
-                                                                <a href="{{ url('show_one_post', $post->id) }}"
-                                                                    class="btn btn-info ">Veiw</a>
-                                                            </div>
-                                                            <div style="padding: 5px;">
-                                                                <a href="{{ url('edit_page', $post->id) }}"
-                                                                    class="btn btn-success ">Edit</a>
-                                                            </div>
+                                                        <td>
                                                             <div style=" padding: 5px;">
+                                                                <!-- Dropdown list to select an action -->
+                                                                <select class="form-control action-select"
+                                                                    onchange="showButton(this, {{ $post->id }})">
+                                                                    <option value="" selected disabled>Select
+                                                                        action</option>
+                                                                    <option value="view">View</option>
+                                                                    <option value="edit">Edit</option>
+                                                                    <option value="delete">Delete</option>
+                                                                    <option value="accept">Accept</option>
+                                                                    <option value="reject">Reject</option>
+                                                                </select>
+                                                            </div>
+                                                            <!-- Buttons for different actions, initially hidden -->
+                                                            <div id="viewButton_{{ $post->id }}"
+                                                                class="btn-wrapper" style="display: none;">
+                                                                <a href="{{ url('show_one_post', $post->id) }}"
+                                                                    class="btn btn-info">View</a>
+                                                            </div>
+                                                            <div id="editButton_{{ $post->id }}"
+                                                                class="btn-wrapper" style="display: none;">
+                                                                <a href="{{ url('edit_page', $post->id) }}"
+                                                                    class="btn btn-primary">Edit</a>
+                                                            </div>
+                                                            <div id="deleteButton_{{ $post->id }}"
+                                                                class="btn-wrapper" style="display: none;">
                                                                 <form id="delete_form_{{ $post->id }}"
                                                                     action="{{ url('delete_post', $post->id) }}"
                                                                     method="POST" class="d-inline delete_form">
                                                                     @csrf
                                                                     @method('DELETE')
                                                                     <button
-                                                                        onclick="checker(event,{{ $post->id }})"
+                                                                        onclick="checker(event, {{ $post->id }})"
                                                                         type="submit"
                                                                         class="btn btn-danger confirm_delete p-2">Delete</button>
                                                                 </form>
                                                             </div>
+                                                            <form id="acceptButton_{{ $post->id }}"
+                                                                class="btn-wrapper" method="POST"
+                                                                style="display: none;"
+                                                                action="{{ url('accept_post', $post->id) }}">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <button class="btn btn-success">Accept</button>
+                                                            </form>
+                                                            <form id="rejectButton_{{ $post->id }}"
+                                                                class="btn-wrapper" method="POST"
+                                                                style="display: none;"
+                                                                action="{{ url('reject_post', $post->id) }}">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <button class="btn btn-danger">Reject</button>
+                                                            </form>
                                                         </td>
                                                     </tr>
                                                     <script type="text/javascript">
@@ -196,6 +207,24 @@
                                                                     swal("Your data is safe!");
                                                                 }
                                                             });
+                                                        }
+                                                        // Function to show the selected button and hide the others
+                                                        function showButton(selectElement, postId) {
+                                                            // Get the selected value from the dropdown list
+                                                            var selectedAction = selectElement.value;
+
+                                                            // Define the button wrapper IDs for each action
+                                                            var buttonWrappers = ['viewButton_', 'editButton_', 'deleteButton_', 'acceptButton_', 'rejectButton_'];
+
+                                                            // Hide all button wrappers
+                                                            buttonWrappers.forEach(function(buttonWrapper) {
+                                                                document.getElementById(buttonWrapper + postId).style.display = 'none';
+                                                            });
+
+                                                            // Show the selected button wrapper
+                                                            if (selectedAction) {
+                                                                document.getElementById(selectedAction + 'Button_' + postId).style.display = 'block';
+                                                            }
                                                         }
                                                     </script>
                                                 @endforeach
@@ -218,13 +247,15 @@
                                     <a class="page-link" href="{{ $posts->url($i) }}">{{ $i }}</a>
                                 </li>
                             @endfor
-                            <li class="page-item {{ $posts->currentPage() == $posts->lastPage() ? ' disabled' : '' }}">
+                            <li
+                                class="page-item {{ $posts->currentPage() == $posts->lastPage() ? ' disabled' : '' }}">
                                 <a class="page-link" href="{{ $posts->nextPageUrl() }}">Next</a>
                             </li>
                         </ul>
                     </nav>
                 </div>
             </div>
+
 
             @include('admin.footer')
         </div>
