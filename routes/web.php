@@ -39,6 +39,7 @@ Route::get('/edit_pending_post/{id}', [AdminController::class, 'edit_pending_pos
 Route::put('/update_pending_post/{id}', [AdminController::class, 'update_pending_post'])->name('admin.update_pending_post');
 Route::put('/accept_post/{id}', [AdminController::class, 'accept_post'])->name('admin.accept_post');
 Route::put('/reject_post/{id}', [AdminController::class, 'reject_post'])->name('admin.reject_post');
+Route::get('/showDashboard', [AdminController::class, 'showDashboard'])->name('admin.showDashboard');
 
 Route::get('/filter_posts', [AdminController::class, 'filterPosts'])->name('filter_posts');
 

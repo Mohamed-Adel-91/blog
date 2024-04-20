@@ -3,7 +3,7 @@
     <x-dropdown-link :href="route('profile.edit')">
         <div class="sidebar-header d-flex align-items-center">
             <div class="avatar">
-                <img src="uploads/images/null.png" alt="..." class="img-fluid rounded-circle" />
+                <img src="/img/user.png" alt="..." class="img-fluid rounded-circle" />
             </div>
             <div class="title mt-3 mb-0">
                 <h1 class="h6">{{ $username }}</h1>

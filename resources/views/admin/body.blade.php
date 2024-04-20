@@ -13,13 +13,14 @@
                             <div class="icon">
                                 <i class="icon-user-1"></i>
                             </div>
-                            <strong>New Clients</strong>
+                            <strong>No. Clients</strong>
                         </div>
-                        <div class="number dashtext-1">27</div>
+                        <div class="number dashtext-1">{{ $noOfClients }}</div>
                     </div>
                     <div class="progress progress-template">
-                        <div role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0"
-                            aria-valuemax="100" class="progress-bar progress-bar-template dashbg-1"></div>
+                        <div role="progressbar" style="width: {{ ($noOfClients / $allUsers) * 100 }}%"
+                            aria-valuenow="{{ ($noOfClients / $allUsers) * 100 }}" aria-valuemin="0" aria-valuemax="100"
+                            class="progress-bar progress-bar-template dashbg-1"></div>
                     </div>
                 </div>
             </div>
@@ -30,12 +31,13 @@
                             <div class="icon">
                                 <i class="icon-contract"></i>
                             </div>
-                            <strong>New Projects</strong>
+                            <strong>New Posts Pending</strong>
                         </div>
-                        <div class="number dashtext-2">375</div>
+                        <div class="number dashtext-2">{{ $newPostsPending }}</div>
                     </div>
                     <div class="progress progress-template">
-                        <div role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0"
+                        <div role="progressbar" style="width: {{ ($newPostsPending / $allPosts) * 100 }}%"
+                            aria-valuenow="{{ ($newPostsPending / $allPosts) * 100 }}" aria-valuemin="0"
                             aria-valuemax="100" class="progress-bar progress-bar-template dashbg-2"></div>
                     </div>
                 </div>
@@ -47,13 +49,50 @@
                             <div class="icon">
                                 <i class="icon-paper-and-pencil"></i>
                             </div>
-                            <strong>New Invoices</strong>
+                            <strong>No. Reject Posts</strong>
                         </div>
-                        <div class="number dashtext-3">140</div>
+                        <div class="number dashtext-3">{{ $noOfRejectPosts }}</div>
                     </div>
                     <div class="progress progress-template">
-                        <div role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0"
+                        <div role="progressbar" style="width: {{ ($noOfRejectPosts / $allPosts) * 100 }}%"
+                            aria-valuenow="{{ ($noOfRejectPosts / $allPosts) * 100 }}" aria-valuemin="0"
                             aria-valuemax="100" class="progress-bar progress-bar-template dashbg-3"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="statistic-block block">
+                    <div class="progress-details d-flex align-items-end justify-content-between">
+                        <div class="title">
+                            <div class="icon">
+                                <i class="icon-paper-and-pencil"></i>
+                            </div>
+                            <strong>No. Active Posts</strong>
+                        </div>
+                        <div class="number dashtext-3">{{ $noOfActivePosts }}</div>
+                    </div>
+                    <div class="progress progress-template">
+                        <div role="progressbar" style="width: {{ ($noOfActivePosts / $allPosts) * 100 }}%"
+                            aria-valuenow="{{ ($noOfActivePosts / $allPosts) * 100 }}" aria-valuemin="0"
+                            aria-valuemax="100" class="progress-bar progress-bar-template dashbg-3"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="statistic-block block">
+                    <div class="progress-details d-flex align-items-end justify-content-between">
+                        <div class="title">
+                            <div class="icon">
+                                <i class="icon-user-1"></i>
+                            </div>
+                            <strong>No. Admins</strong>
+                        </div>
+                        <div class="number dashtext-1">{{ $noOfAdmins }}</div>
+                    </div>
+                    <div class="progress progress-template">
+                        <div role="progressbar" style="width: {{ ($noOfAdmins / $allUsers) * 100 }}%"
+                            aria-valuenow="{{ ($noOfAdmins / $allUsers) * 100 }}" aria-valuemin="0" aria-valuemax="100"
+                            class="progress-bar progress-bar-template dashbg-1"></div>
                     </div>
                 </div>
             </div>
@@ -64,16 +103,18 @@
                             <div class="icon">
                                 <i class="icon-writing-whiteboard"></i>
                             </div>
-                            <strong>All Projects</strong>
+                            <strong>All Posts</strong>
                         </div>
-                        <div class="number dashtext-4">41</div>
+                        <div class="number dashtext-4">{{ $allPosts }}</div>
                     </div>
                     <div class="progress progress-template">
-                        <div role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0"
-                            aria-valuemax="100" class="progress-bar progress-bar-template dashbg-4"></div>
+                        <div role="progressbar" style="width: 100%" aria-valuenow="{{ $allPosts }}"
+                            aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-4">
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </section>

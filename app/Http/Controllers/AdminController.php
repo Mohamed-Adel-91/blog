@@ -12,19 +12,28 @@ use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
-    public function homeAdmin()
+    public function homeAdmin(Request $request)
     {
         $user = Auth::user();
         $username = $user->name;
         $userType = $user->user_type;
-        return view('admin.homeAdmin', compact('username', 'userType'));
+        $pendingPosts = Post::where('post_status', 'Pending')->get();
+        $noOfClients = User::where('user_type', 'client')->count();
+        $newPostsPending = Post::where('post_status', 'Pending')->count();
+        $noOfRejectPosts = Post::where('post_status', 'Rejected')->count();
+        $noOfActivePosts = Post::where('post_status', 'Active')->count();
+        $noOfAdmins = User::where('user_type', 'admin')->count();
+        $allPosts = Post::count();
+        $allUsers = User::count();
+        return view('admin.homeAdmin', compact('username', 'userType', 'pendingPosts', 'request', 'noOfClients', 'newPostsPending', 'noOfRejectPosts', 'noOfActivePosts', 'noOfAdmins', 'allPosts' , 'allUsers'));
     }
-    public function post_page()
+    public function post_page(Request $request)
     {
         $user = Auth::user();
         $username = $user->name;
         $userType = $user->user_type;
-        return view('admin.post_page', compact(['username', 'userType']));
+        $pendingPosts = Post::where('post_status', 'Pending')->get();
+        return view('admin.post_page', compact(['username', 'userType', 'pendingPosts']));
     }
     public function add_post(Request $request)
     {
@@ -62,13 +71,14 @@ class AdminController extends Controller
         return redirect()->back()->with('message', 'Post Added Successfully!');
     }
 
-    public function show_post()
+    public function show_post(Request $request)
     {
         $posts = Post::all();
         $user = Auth::user();
         $username = $user->name;
         $userType = $user->user_type;
-        return view('admin.show_post', compact(['posts', 'username', 'userType']))->with('posts', Post::orderBy('created_at', 'desc')->paginate(10));
+        $pendingPosts = Post::where('post_status', 'Pending')->get();
+        return view('admin.show_post', compact(['posts', 'username', 'userType', 'pendingPosts']))->with('posts', Post::orderBy('created_at', 'desc')->paginate(10));
     }
 
     public function delete_post($id)
@@ -78,22 +88,24 @@ class AdminController extends Controller
         return redirect(route('admin.show_post'))->with('message', 'Post Deleted Successfully!');
     }
 
-    public function edit_page($id)
+    public function edit_page($id, Request $request)
     {
         $post = Post::findOrFail($id);
         $user = Auth::user();
         $username = $user->name;
         $userType = $user->user_type;
-        return view('admin.edit_page', compact('post', 'username', 'userType'));
+        $pendingPosts = Post::where('post_status', 'Pending')->get();
+        return view('admin.edit_page', compact('post', 'username', 'userType', 'pendingPosts'));
     }
 
-    public function show_one_post($id)
+    public function show_one_post($id, Request $request)
     {
         $post = Post::findOrFail($id);
         $user = Auth::user();
         $username = $user->name;
         $userType = $user->user_type;
-        return view('admin.show_one_post', compact('post', 'username', 'userType'));
+        $pendingPosts = Post::where('post_status', 'Pending')->get();
+        return view('admin.show_one_post', compact('post', 'username', 'userType', 'pendingPosts'));
     }
 
     public function update_post(Request $request, $id)
@@ -137,26 +149,33 @@ class AdminController extends Controller
         return redirect(route('admin.show_one_post', $id))->with('message', 'Your blog post has been updated!');
     }
 
-    public function show_pending_post()
+    public function show_pending_post(Request $request)
     {
         $posts = Post::where('post_status', '=', 'Pending')->get();
         $user = Auth::user();
         $username = $user->name;
         $userType = $user->user_type;
-        return view('admin.show_post', compact(['posts', 'username', 'userType']))->with('posts', Post::orderBy('created_at', 'desc')->paginate(10));
+        $pendingPosts = Post::where('post_status', 'Pending')->get();
+        return view('admin.show_post', compact(['posts', 'username', 'userType', 'pendingPosts']))->with('posts', Post::orderBy('created_at', 'desc')->paginate(10));
     }
 
-    public function edit_pending_post($id)
+    public function edit_pending_post($id, Request $request)
     {
         $post = Post::findOrFail($id);
         $user = Auth::user();
         $username = $user->name;
         $userType = $user->user_type;
-        return view('admin.edit_page', compact('post', 'username', 'userType'));
+        // Query for pending posts
+        $pendingPosts = Post::where('post_status', 'Pending')->get();
+        return view('admin.edit_page', compact('post', 'username', 'userType', 'pendingPosts'));
     }
-    public function update_pending_post()
+    public function showDashboard()
     {
+        // Query for pending posts
+        $pendingPosts = Post::where('post_status', 'Pending')->get();
 
+        // Pass the pending posts to the view
+        return view('admin.dashboardAdmin', ['pendingPosts' => $pendingPosts]);
     }
 
     public function accept_post($id)
@@ -166,7 +185,7 @@ class AdminController extends Controller
         $data->save();
         Session::flash('message', 'The Blog has been Accepted!');
         return redirect()->back();
-        // return redirect()->back()->with('message', 'Your blog post has been updated!');
+
     }
 
     public function reject_post($id)
@@ -176,7 +195,7 @@ class AdminController extends Controller
         $data->save();
         Session::flash('message', 'The Blog has been Rejected!');
         return redirect()->back();
-        // return redirect()->back()->with('message', 'Your blog post has been updated!');
+
     }
 
     public function filterPosts(Request $request)
@@ -211,8 +230,8 @@ class AdminController extends Controller
         }
 
         $posts = $query->paginate(10);
-
-        return view('admin.show_post', compact('posts', 'username', 'userType'));
+        $pendingPosts = Post::where('post_status', 'Pending')->get();
+        return view('admin.show_post', compact('posts', 'username', 'userType', 'pendingPosts'));
     }
 
 }

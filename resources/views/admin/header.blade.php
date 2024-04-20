@@ -37,28 +37,32 @@
                     <a href="#" class="search-open nav-link"><i class="icon-magnifying-glass-browser"></i></a>
                 </div>
                 <div class="list-inline-item dropdown">
-                    <a id="navbarDropdownMenuLink1" href="http://example.com" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false" class="nav-link messages-toggle"><i
-                            class="icon-email"></i><span class="badge dashbg-1">5</span></a>
+                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false" class="nav-link messages-toggle">
+                        <i class="icon-email"></i><span class="badge dashbg-1">{{ $pendingPosts->count() }}</span>
+                    </a>
                     <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages">
-                        <a href="#" class="dropdown-item message d-flex align-items-center">
-                            <div class="profile">
-                                <img src="adminTemplate/img/avatar-3.jpg" alt="..." class="img-fluid" />
-                                <div class="status online"></div>
-                            </div>
-                            {{-- @foreach ($posts as $post) --}}
-                            <div class="content">
-                                <strong class="d-block">Nadia Halsey</strong><span class="d-block">lorem ipsum dolor
-                                    sit amit</span><small class="date d-block">9:30am</small>
-                            </div>
-                            {{-- @endforeach --}}
-                        </a>
-                        <a href="#" class="dropdown-item text-center message">
-                            <strong>See All Messages
+                        @foreach ($pendingPosts as $post)
+                            <a href="#" class="dropdown-item message d-flex align-items-center">
+                                <div class="profile">
+                                    <img src="/img/user.png" alt="..." class="img-fluid" />
+                                    <div class="status online"></div>
+                                </div>
+                                <div class="content">
+                                    <strong class="d-block">{{ $post->name }}</strong>
+                                    <span class="d-block">{{ $post->title }}</span>
+                                    <small class="date d-block">{{ $post->created_at->format('h:i a') }}</small>
+                                </div>
+                            </a>
+                        @endforeach
+                        <a href="{{ url('show_post') }}" class="dropdown-item text-center message">
+                            <strong>See All Pending Posts
                                 <i class="fa fa-angle-right"></i></strong>
                         </a>
                     </div>
                 </div>
+
+
                 <!-- Tasks-->
                 {{-- <div class="list-inline-item dropdown">
                     <a id="navbarDropdownMenuLink2" href="http://example.com" data-toggle="dropdown"
