@@ -36,8 +36,21 @@
         media="screen">
     <style>
         .blogs_section {
-            padding: 250px 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            padding: 25px;
             z-index: -1;
+        }
+
+        h1 {
+            font-size: 32px;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 </head>
@@ -48,24 +61,27 @@
         @include('home.header')
     </div>
     <!-- header section end -->
+    <h1><strong>Post no. {{ $post->id }} Details</strong></h1>
     <!-- blog section start -->
-    <div class="blogs_section">
-        <div class="card mb-3">
-            <img src="uploads/images/{{ $post->image }}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h2 class="card-title">{{ $post->title }}</h3>
-                    <strong>Description: </strong>
-                    <p class="card-text">{{ $post->description }}</p>
-                    <h5 class="card-title">Created By: {{ $post->name }} - {{ $post->user->user_type }}</h5>
-                    <h5 class="card-title">Status: {{ $post->post_status }}</h5>
-                    <p class="card-text"><small class="text-body-secondary">Last updated at:
-                            {{ $post->updated_at }}</small>
-                    </p>
+    <div class="blogs_section container ">
+        <div class="row">
+            <div class="card col-12 mb-3">
+                <img src="uploads/images/{{ $post->image }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h1 class="card-title">{{ $post->title }}</h3>
+                        <strong>Description: </strong>
+                        <p class="card-text">{{ $post->description }}</p>
+                        <h3 class="card-title">Created By: {{ $post->name }} - {{ $post->user->user_type }}</h3>
+                        <h3 class="card-title">Status: {{ $post->post_status }}</h3>
+                        <p class="card-text"><small class="text-body-secondary">Last updated at: {{ $post->updated_at }}
+                            </small></p>
+                </div>
+            </div>
+            <div class="btn_main">
+                <a href="{{ route('home') }}">Go Back</a>
             </div>
         </div>
-        <div class="btn_main">
-            <a href="{{ route('home') }}">Go Back</a>
-        </div>
+
     </div>
 
     <!-- blog section end -->
